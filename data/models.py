@@ -1,5 +1,5 @@
 import peewee
-from download_products import DataFiles
+"""from download_products import DataFiles"""
 
 
 pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',
@@ -32,7 +32,7 @@ Store.create_table()
 
 class Category(peewee.Model):
     """ Class to define the Category table."""    
-    categories_tags = peewee.CharField(primary_key=True)
+    categories = peewee.CharField(primary_key=True)
 
     class Meta:                
         database = pg_db
@@ -61,7 +61,7 @@ class History(peewee.Model):
     remplacement_product = peewee.ForeignKeyField(Product, backref='history')
 
     class Meta:
-        primary_key = peewee.CompositeKey('user', 'chosen_product')                
+        primary_key = peewee.CompositeKey('id', 'chosen_product')                
         database = pg_db
         db_table = 'history'
 
@@ -70,10 +70,10 @@ History.create_table()
 class ProductCategory(peewee.Model):
     """ Class to define the Product category table."""
     _id = peewee.ForeignKeyField ( Product, backref='product_category')
-    categories_tags = peewee.ForeignKeyField ( Category, backref='product_category')
+    categories = peewee.ForeignKeyField ( Category, backref='product_category')
 
     class Meta:
-        primary_key = peewee.CompositeKey('_id', 'categories_tags')                
+        primary_key = peewee.CompositeKey('_id', 'categories')                
         database = pg_db
         db_table = 'product_category'
 
@@ -91,28 +91,5 @@ class ProductStore(peewee.Model):
 
 ProductStore.create_table()
 
-class InsertData:
-    """
-    Class to insert products into Models tables
-    """
-    """
-    Import the products from download_products
-    """
-    categories_tags = DataFiles.categories_tags
-    stores_tags = DataFiles.stores_tags
-    products_to_inser = DataFiles.products_to_inser
-    _id_and_categories = DataFiles._id_and_categories
-    _id_and_stores = DataFiles._id_and_stores
-    """
-    Insert all products in database
-    """
-
-
 if __name__ == "__main__":
-
-    def insert_data()
-        Category.insert_many(categories_tags).execute()
-        Store.insert_many(stores_tags).execute()
-        Product.insert_many(products_to_inser).execute()
-        ProductCategory.insert_many(_id_and_categories).execute()
-        ProductStore.insert_many(_id_and_stores).execute()
+    pass 

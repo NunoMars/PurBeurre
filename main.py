@@ -2,7 +2,7 @@
 # -*- coding: Utf-8 -*
 import sys
 sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\data')
-
+from data.updateBDD import InsertOrDeleteData
 
 """
 Main page of the program.
@@ -20,7 +20,7 @@ while True:
     if main_choice == '2':
         pass
     if main_choice == "3":
-        import models
+        InsertOrDeleteData.update_all_products()
         
         break
     else:

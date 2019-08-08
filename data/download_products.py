@@ -1,7 +1,7 @@
 import requests, json
 from dataclasses import dataclass
 from clear_data import CleanFile
-import pprint
+
 @dataclass
 class DataFiles:
     """
@@ -13,7 +13,7 @@ class DataFiles:
     cheese = list
     pasta = list
     products_to_inser = list
-    categories_tags = list
+    categories = list
     stores_tags = list
     _id_and_stores = list
     _id_and_categories = list
@@ -27,8 +27,10 @@ class DataFiles:
     link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=cheese&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
     link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pasta&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
     
+if __name__ == "__main__":
+
     print( "Importation started let's do some work now!")
-    
+        
     r = requests.get(link1)
     snacks = json.loads(r.content)# rec the data in a variable
     print("We have now 1000 products downloaded!")
@@ -76,8 +78,8 @@ class DataFiles:
     products_to_inser = CleanFile.products_to_inser(products) 
     print(len(products_to_inser), "Products are ready to insert.")
 
-    categories_tags = CleanFile.select_categories(products)
-    print("We have ", len(categories_tags),"categories!")
+    categories = CleanFile.select_categories(products)
+    print("We have ", len(categories),"categories!")
 
     stores_tags = CleanFile.select_stores_tags(products)
     print("Wee have ", len(stores_tags),"stores!")
@@ -87,6 +89,3 @@ class DataFiles:
 
     _id_and_categories = CleanFile.select_id_and_categories(products)
     print(len(_id_and_categories), "Id and categories are ready to insert.")
-
-if __name__ == "__main__":
-    pass

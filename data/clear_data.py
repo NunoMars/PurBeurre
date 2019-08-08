@@ -1,7 +1,5 @@
-from dataclasses import dataclass
 from collections import OrderedDict
-import pprint
-@dataclass
+
 class CleanFile:
     """
     Class to filter the data.
@@ -28,15 +26,15 @@ class CleanFile:
             current_categories =[]
 
             for p_label, p_value in product.items():
-                if p_label == "categories_tags":
+                if p_label == "categories":
                     if len(p_value) != 0:
                         if p_value != None or "null":
                             for item in p_value:
-                                item = item.split(":")
-                                if item[0] == "fr": #choose just the "fr" categories
-                                    current_categories.append(item[1])
+                                item = item.split(",")
+                                if item not in current_categories:
+                                    current_categories.append(item)
                     if len(current_categories) != 0:
-                        current_product.update({"categories_tags": current_categories})
+                        current_product.update({"categories": current_categories})
             for p_label, p_value in product.items(): #test if the labels and values are in the dictionary
                 if p_label in wanted_labels:# add to current_product if key and value are present
                     if len(p_value) != 0:
@@ -96,11 +94,11 @@ class CleanFile:
         current_category = []
         processed_categories = []
         for product in products:
-            for category in product["categories_tags"]:
+            for category in product["categories"]:
                 if category not in current_category:
                     current_category.append(category)
         for item in current_category:
-            processed_categories.append({"categories_tags" : item})
+            processed_categories.append({"categories" : item})
         return processed_categories
        
     def select_stores_tags(file):
@@ -127,7 +125,8 @@ class CleanFile:
         processed_id_and_stores = []
         for product in products:
             for store in product["stores_tags"]:
-                processed_id_and_stores.append({'_id': product['_id'], "stores_tags": store})
+                if {'_id': product['_id'], "stores_tags": store} not in processed_id_and_stores:
+                    processed_id_and_stores.append({'_id': product['_id'], "stores_tags": store})
         return processed_id_and_stores
 
     def select_id_and_categories(file):
@@ -137,6 +136,7 @@ class CleanFile:
         products = file
         processed_id_and_categories = []
         for product in products:
-            for category in product["categories_tags"]:
-                processed_id_and_categories.append({'_id': product['_id'], "categories_tags": category})
+            for category in product["categories"]:
+                if {'_id': product['_id'], "categories": category} not in processed_id_and_categories:
+                    processed_id_and_categories.append({'_id': product['_id'], "categories": category})
         return processed_id_and_categories
