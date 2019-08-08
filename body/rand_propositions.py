@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from random import choice
 
 @dataclass
-class Basquets:
-    def nike(file):
+class RandList:
+    def rand_propose(file):
         file = file
         rand_items = []
         
