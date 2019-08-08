@@ -9,11 +9,10 @@ class InsertOrDeleteData:
     def update_all_products():
         """
         Delete all products in dbb
-        """
-        
+        """        
         while True:
             main_choice = input("Do you realy want's to update the DataBase?\n(Y) or (N)")
-            if main_choice == 'Y' or 'y':
+            if main_choice == 'Y' or main_choice == 'y':
                 print("Clearing all tables!!!") 
                 query5 = ProductCategory.delete()
                 f = query5.execute()
@@ -36,6 +35,7 @@ class InsertOrDeleteData:
                 """
                 Import the products from download_products
                 """
+                files = DataFiles.load_products_openfoodfacts()
                 categories = DataFiles.categories
                 stores_tags = DataFiles.stores_tags
                 products_to_inser = DataFiles.products_to_inser
@@ -50,7 +50,8 @@ class InsertOrDeleteData:
                 Product.insert_many(products_to_inser).execute()
                 ProductCategory.insert_many(_id_and_categories).execute()
                 ProductStore.insert_many(_id_and_stores).execute()
-            if main_choice == 'N' or 'n':              
+
+            if main_choice == 'N' or main_choice == 'n':              
                 break 
             else:
                 continue 

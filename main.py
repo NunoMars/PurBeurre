@@ -16,7 +16,7 @@ print("Select one of those three choises please!!")
 while True:
     main_choice = input(" 1 - Which food do you want to replace?\n 2 - Find my substituted foods.\n 3 - Update the database!\n What is your choice?")
     if main_choice == '1': 
-        categories = Querries.proposed_categories
+        pass
     if main_choice == '2':
         pass
     if main_choice == "3":
@@ -26,5 +26,5 @@ while True:
     else:
         continue
 
-main_choice 
+
 
