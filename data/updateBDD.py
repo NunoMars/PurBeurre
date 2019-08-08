@@ -55,7 +55,7 @@ class InsertOrDeleteData:
                 break 
             else:
                 continue 
-       
+        return print("The DataBase is updated!")
 
 if __name__ == "__main__":
     pass
