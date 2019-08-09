@@ -1,5 +1,3 @@
-from collections import OrderedDict
-from pprint import pprint
 class CleanFile:
     """
     Class to filter the data.
@@ -22,7 +20,6 @@ class CleanFile:
 
         for product in products:# the list contains dictionaries
             current_product = {}
-            o_current_product = {}
             current_categories_values = []
             for p_label, p_value in product.items():
                 if p_label == "categories":
@@ -44,9 +41,8 @@ class CleanFile:
                             current_product.update({p_label: p_value})
 
             if len(current_product) == 7:
-                o_current_product = OrderedDict(sorted(current_product.items(), key=lambda t: t[0]))
-                if o_current_product not in processed_products: 
-                    processed_products.append(o_current_product)
+                if current_product not in processed_products: 
+                    processed_products.append(current_product)
      
         return processed_products #return cleaned file
 
@@ -77,7 +73,6 @@ class CleanFile:
         
         print ( "Let's do some clean-up job!")
         processed_products = [] 
-        pprint(products)
         for product in products:# the list contains dictionaries
             current_product = {}
             for p_label, p_value in product.items():
