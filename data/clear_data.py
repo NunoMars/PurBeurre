@@ -77,7 +77,7 @@ class CleanFile:
         
         print ( "Let's do some clean-up job!")
         processed_products = [] 
-
+        pprint(products)
         for product in products:# the list contains dictionaries
             current_product = {}
             for p_label, p_value in product.items():

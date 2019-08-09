@@ -8,17 +8,17 @@ class DataFiles:
     """
     Class allowing to download and filter the products to be inserted in the Data Base.
     """
-    snacks = list
-    pizzas = list
-    drinks = list
-    cheese = list
-    pasta = list
-    products = list
-    products_to_inser = list
-    categories = list
-    stores_tags = list
-    id_and_stores = list
-    _id_and_categories = list
+    snacks : list
+    pizzas : list
+    drinks : list
+    cheese : list
+    pasta : list
+    products : list 
+    products_to_inser : list
+    categories : list
+    stores_tags : list
+    id_and_stores : list
+    _id_and_categories : list
 
     print( "Importation started let's do some work now!")
 
@@ -27,7 +27,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """
 
-        link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&sort_by=unique_scans_n&page_size=10&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"    
+        link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&sort_by=unique_scans_n&page_size=1&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"    
         r = requests.get(link1)
         snacks = json.loads(r.content)# rec the data in a variable
         print("We have now 1000 products downloaded!")
@@ -40,7 +40,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """
        
-        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=10&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=1&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link2)
         pizzas = json.loads(r.content)# rec the data in a variable
         print("We have now 1000 products downloaded!")
@@ -53,7 +53,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """
 
-        link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&sort_by=unique_scans_n&page_size=10&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&sort_by=unique_scans_n&page_size=1&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link3)
         drinks = json.loads(r.content)
         print("We have now 3000 products downloaded!")
@@ -66,7 +66,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """      
 
-        link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=fromages&sort_by=unique_scans_n&page_size=10&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=fromages&sort_by=unique_scans_n&page_size=1&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link4)
         cheese = json.loads(r.content)
         print("We have now 4000 products downloaded!")
@@ -79,7 +79,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """
 
-        link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pâtes&sort_by=unique_scans_n&page_size=10&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pâtes&sort_by=unique_scans_n&page_size=1&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link5)
         pasta = json.loads(r.content)
         print("We have now 5000 products downloaded! Now let's clean them ;-) !")
@@ -91,7 +91,8 @@ class DataFiles:
         """
         Modul to add, clean and parse all products-file.
         """
-        products = DataFiles.snacks + Datafiles.pizzas + DataFiles.drinks + DataFiles.cheese + DataFiles.pasta      
+        products = DataFiles.snacks + DataFiles.pizzas + Datafiles.drinks + DataFiles.dcheese + DataFiles.pasta
+        pprint(products)      
         products = CleanFile.eliminate_duplicate_products(products)
         print("After a hard cleaning job we have", len(products), "good products! let's put them in the Data_Base!")
         return products
@@ -100,9 +101,9 @@ class DataFiles:
         """
         Modul to prepare products-file to insert in database.
         """
-        products = DataFiles.products 
+        products = DataFiles.products
         products_to_inser = CleanFile.products_to_inser(products) 
-        print(len(self.products_to_inser), "Products are ready to insert.")
+        print(len(products_to_inser), "Products are ready to insert.")
         return products_to_inser
 
     def add_and_clean_all_categories():
@@ -110,7 +111,7 @@ class DataFiles:
         Modul to prepare categories-file to insert in database.
         """ 
         categories = CleanFile.select_categories(products)
-        print("We have ", len(self.categories),"categories!")
+        print("We have ", len(categories),"categories!")
         return categories
 
     def add_and_clean_all_stores():
@@ -118,7 +119,7 @@ class DataFiles:
         Modul to prepare stores-file to insert in database.
         """
         stores_tags = CleanFile.select_stores_tags(products)
-        print("Wee have ", len(self.stores_tags),"stores!")
+        print("Wee have ", len(stores_tags),"stores!")
         return stores_tags
 
     def add_and_clean_all_id_and_stores():
@@ -126,7 +127,7 @@ class DataFiles:
         Modul to prepare id_and_sores-file to insert in database.
         """ 
         _id_and_stores = CleanFile.select_id_and_stores_tags(products)
-        print(len(self._id_and_stores), "Id and stores are ready to insert.")
+        print(len(_id_and_stores), "Id and stores are ready to insert.")
         return _id_and_stores
 
     def add_and_clean_all_id_and_categories():
@@ -134,9 +135,9 @@ class DataFiles:
         Modul to prepare id_and_categorie-file to insert in database.
         """
         _id_and_categories = CleanFile.select_id_and_categories(products)
-        print(len(self._id_and_categories), "Id and categories are ready to insert.")
+        print(len(_id_and_categories), "Id and categories are ready to insert.")
         return _id_and_categories
-
+DataFiles.add_and_clean_all_products()
 if __name__ == "__main__":
     DataFiles.download_and_clean_snacks()
     DataFiles.download_and_clean_pizzas()
