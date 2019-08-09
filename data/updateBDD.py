@@ -1,6 +1,7 @@
 import sys
 from models import User, Store, Category, Product, History, ProductCategory, ProductStore
 from download_products import DataFiles
+from pprint import pprint
 
 class InsertOrDeleteData:
     """
@@ -35,12 +36,12 @@ class InsertOrDeleteData:
                 """
                 Import the products from download_products
                 """
-                files = DataFiles.load_products_openfoodfacts()
                 categories = DataFiles.categories
-                stores_tags = DataFiles.stores_tags
-                products_to_inser = DataFiles.products_to_inser
-                _id_and_categories = DataFiles._id_and_categories
-                _id_and_stores = DataFiles._id_and_stores
+                pprint(categories)
+                stores_tags =data.stores_tags
+                products_to_inser = data.products_to_inser
+                _id_and_categories = data._id_and_categories
+                _id_and_stores = data._id_and_stores
                 """
                 Insert all products in database
                 """
@@ -50,12 +51,13 @@ class InsertOrDeleteData:
                 Product.insert_many(products_to_inser).execute()
                 ProductCategory.insert_many(_id_and_categories).execute()
                 ProductStore.insert_many(_id_and_stores).execute()
-
+                print("The DataBase is updated!")
+                break
             if main_choice == 'N' or main_choice == 'n':              
                 break 
             else:
                 continue 
-        return print("The DataBase is updated!")
+
 
 if __name__ == "__main__":
-    pass
+    update = InsertOrDeleteData.update_all_products()

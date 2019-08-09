@@ -1,5 +1,5 @@
 from collections import OrderedDict
-
+from pprint import pprint
 class CleanFile:
     """
     Class to filter the data.
@@ -23,18 +23,20 @@ class CleanFile:
         for product in products:# the list contains dictionaries
             current_product = {}
             o_current_product = {}
-            current_categories =[]
-
+            current_categories_values = []
             for p_label, p_value in product.items():
                 if p_label == "categories":
                     if len(p_value) != 0:
-                        if p_value != None or "null":
-                            for item in p_value:
-                                item = item.split(",")
-                                if item not in current_categories:
-                                    current_categories.append(item)
-                    if len(current_categories) != 0:
-                        current_product.update({"categories": current_categories})
+                        if p_value != None or "null" or " ":
+                            item = p_value.split(",")
+                            if item != []:
+                                for i in item:
+                                    if i[0] == " ":
+                                        i = i[1:]
+                                        current_categories_values.append(i)
+            if len(current_categories_values) != 0:
+                current_product.update({"categories": current_categories_values})
+                            
             for p_label, p_value in product.items(): #test if the labels and values are in the dictionary
                 if p_label in wanted_labels:# add to current_product if key and value are present
                     if len(p_value) != 0:

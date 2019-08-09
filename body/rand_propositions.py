@@ -2,14 +2,14 @@ from dataclasses import dataclass
 from random import choice
 
 @dataclass
-class RandList:
+"""class RandList:
     def rand_propose(file):
         file = file
         rand_items = []
-        
+        print(file)
         for items in file:
             while rand_items == len(20):
                 rand_choice = choice(file)
                 if rand_choice not in rand_items:
                     rand_items.append(rand_choice)
-        return rand_items
+        return rand_items"""
