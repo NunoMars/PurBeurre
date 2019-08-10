@@ -1,3 +1,4 @@
+from pprint import pprint
 class CleanFile:
     """
     Class to filter the data.
@@ -22,17 +23,17 @@ class CleanFile:
             current_product = {}
             current_categories_values = []
             for p_label, p_value in product.items():
-                if p_label == "categories":
+                if p_label == "categories_hierarchy":
                     if len(p_value) != 0:
                         if p_value != None or "null" or " ":
-                            item = p_value.split(",")
-                            if item != []:
-                                for i in item:
-                                    if i[0] == " ":
-                                        i = i[1:]
-                                        current_categories_values.append(i)
+                            for item in p_value:
+                                if item != [] and item != " ":
+                                    item = item[3:]
+                                    item = item.split(" ")
+                                    if item[0] not in current_categories_values:
+                                        current_categories_values.append(item[0])
             if len(current_categories_values) != 0:
-                current_product.update({"categories": current_categories_values})
+                current_product.update({"categories": current_categories_values[:3]})
                             
             for p_label, p_value in product.items(): #test if the labels and values are in the dictionary
                 if p_label in wanted_labels:# add to current_product if key and value are present

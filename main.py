@@ -27,8 +27,7 @@ while True:
         pass
     if main_choice == "3":
         InsertOrDeleteData.update_all_products()
-        
-        break
+        pass
     else:
         continue
 
