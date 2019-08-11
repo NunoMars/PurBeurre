@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from pprint import pprint
 class CleanFile:
     """
@@ -17,7 +18,7 @@ class CleanFile:
         "nutrition_grade_fr"] #list of the labels to search, test and add to the new list
         
         print ( "Let's do some clean-up job!")
-        processed_products = [] 
+        processed_products = []
 
         for product in products:# the list contains dictionaries
             current_product = {}
@@ -26,24 +27,24 @@ class CleanFile:
                 if p_label == "categories_hierarchy":
                     if len(p_value) != 0:
                         if p_value != None or "null" or " ":
-                            for item in p_value:
-                                if item != [] and item != " ":
-                                    item = item[3:]
-                                    item = item.split(" ")
-                                    if item[0] not in current_categories_values:
-                                        current_categories_values.append(item[0])
-            if len(current_categories_values) != 0:
-                current_product.update({"categories": current_categories_values[:3]})
-                            
+                            if p_value[0] != [] and p_value[0] != " ":
+                                value = p_value[0]
+                                value = value[3:]
+                                if value not in current_categories_values:
+                                    current_categories_values.append(value)
+                                current_product.update({"categories": current_categories_values})
+               
+                          
             for p_label, p_value in product.items(): #test if the labels and values are in the dictionary
                 if p_label in wanted_labels:# add to current_product if key and value are present
                     if len(p_value) != 0:
                         if p_value != None or "null":       
                             current_product.update({p_label: p_value})
-
-            if len(current_product) == 7:
-                if current_product not in processed_products: 
-                    processed_products.append(current_product)
+            o_current_product = OrderedDict(sorted(current_product.items(), key=lambda t: t[0]))
+            if len(o_current_product) == 7:
+                if o_current_product not in processed_products:
+                    o_current_product 
+                    processed_products.append(o_current_product)
      
         return processed_products #return cleaned file
 
@@ -82,7 +83,6 @@ class CleanFile:
             processed_products.append(current_product)
                     
         return processed_products #return cleaned file
-
     
     def select_categories(file):
         """

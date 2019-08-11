@@ -18,8 +18,6 @@ class User(peewee.Model):
         database = pg_db
         db_table = 'user'
 
-User.create_table()
-
 class Store(peewee.Model):
     """ Class to define the Store table."""
     stores_tags = peewee.CharField(primary_key=True)
@@ -27,8 +25,6 @@ class Store(peewee.Model):
     class Meta:                
         database = pg_db
         db_table = 'store'
-
-Store.create_table()
 
 class Category(peewee.Model):
     """ Class to define the Category table."""    
@@ -38,11 +34,9 @@ class Category(peewee.Model):
         database = pg_db
         db_table = 'category'
 
-Category.create_table()
-
 class Product(peewee.Model):
     """ Class to define the Product table."""
-    _id = peewee.BigIntegerField(primary_key=True)
+    _id = peewee.CharField(primary_key=True)
     ingredients_text_fr = peewee.TextField()
     nutrition_grade_fr = peewee.CharField()
     product_name_fr = peewee.TextField()
@@ -51,8 +45,6 @@ class Product(peewee.Model):
     class Meta:                
         database = pg_db
         db_table = 'product'
-
-Product.create_table()
 
 class History(peewee.Model):
     """ Class to define the History table."""
@@ -65,8 +57,6 @@ class History(peewee.Model):
         database = pg_db
         db_table = 'history'
 
-History.create_table()        
-
 class ProductCategory(peewee.Model):
     """ Class to define the Product category table."""
     _id = peewee.ForeignKeyField ( Product, backref='product_category')
@@ -76,8 +66,6 @@ class ProductCategory(peewee.Model):
         primary_key = peewee.CompositeKey('_id', 'categories')                
         database = pg_db
         db_table = 'product_category'
-
-ProductCategory.create_table()
 
 class ProductStore(peewee.Model):
     """ Class to define the Product Store table."""
@@ -89,7 +77,11 @@ class ProductStore(peewee.Model):
         database = pg_db
         db_table = 'product_store'
 
-ProductStore.create_table()
-
 if __name__ == "__main__":
-    pass 
+    User.create_table()
+    Store.create_table()
+    Category.create_table()
+    Product.create_table()
+    History.create_table()
+    ProductCategory.create_table()
+    ProductStore.create_table() 
