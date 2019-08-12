@@ -63,6 +63,8 @@ class InsertOrDeleteData:
                 ProductStore.insert_many(_id_and_stores).execute()
                 print("The DataBase is updated!")
                 break
+            else:
+                break
             if main_choice == 'N' or main_choice == 'n':              
                 break 
             else:
