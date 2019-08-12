@@ -20,7 +20,9 @@ print("Select one of those three choises please!!")
 while True:
     main_choice = input(" 1 - Which food do you want to replace?\n 2 - Find my substituted foods.\n 3 - Update the food-database!\n 4 - To quit!\n What is your choice")
     if main_choice == '1':
-        BddQueries.Choice_1(BddQueries) 
+        BddQueries.Choice_categories(BddQueries)
+        BddQueries.Choice_products(BddQueries)
+        BddQueries.rec_current_products(BddQueries, name) 
             
     if main_choice == '2':
         BddQueries.choice_2(BddQueries)
