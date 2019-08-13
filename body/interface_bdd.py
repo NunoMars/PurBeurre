@@ -58,20 +58,22 @@ class BddQueries:
             print("I've found a equivalent product It's:\n Is Id:",self.proposed_product._id,"\n Namne:", self.proposed_product.product_name_fr,"\n Web-page:",self.proposed_product.url,"\n Ingredients :", self.proposed_product.ingredients_text_fr)
             break
 
-    def rec_current_products(self, name):
+    def rec_current_products(self):
         """
         Record the product in dbb
-        """        
+        """      
         while True:
             rec_choice = input("Do you want's record this chice to the DataBase?\n(Y) or (N)")
-            if main_choice == 'Y' or main_choice == 'y':
-                user_id = (User.select().where(User.u_name == name).limit(1))
-                _id = user_id.id
-                queri = History.insert(History.id == _id, History.chosen_product == self.c_product, History.remplacement_product == self.proposed_product)
+            if rec_choice == 'Y' or rec_choice == 'y':
+                query = (User.select().order_by(User.id.desc())
+                for index, value in enumerate(query):
+                    print index, value)
+                insert_history = History.insert(History.id == user_r.id, History.chosen_product == self.c_product, History.remplacement_product == self.proposed_product).execute()
+                print("Done ;-)!")
                 break
             else:
                 break
-            if main_choice == 'N' or main_choice == 'n':              
+            if rec_choice == 'N' or rec_choice == 'n':              
                 break 
             else:
                 continue 
@@ -81,7 +83,6 @@ class BddQueries:
         while True:
             query_history = History.select()
             history_index_list =[]
-            p_categories = Category.select().execute()
             print("You have", len(query_history), "recorded products!")
             for index, value in enumerate(query_history):
                 print (index, value )
@@ -92,3 +93,4 @@ if __name__ == "__main__":
     BddQueries.Choice_categories(BddQueries)
     BddQueries.Choice_products(BddQueries)
     BddQueries.choice_2(BddQueries)
+    BddQueries.rec_current_products(BddQueries)

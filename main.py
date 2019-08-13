@@ -22,7 +22,7 @@ while True:
     if main_choice == '1':
         BddQueries.Choice_categories(BddQueries)
         BddQueries.Choice_products(BddQueries)
-        BddQueries.rec_current_products(BddQueries, name) 
+        BddQueries.rec_current_products(BddQueries) 
             
     if main_choice == '2':
         BddQueries.choice_2(BddQueries)
