@@ -1,6 +1,6 @@
 import sys
 sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\data')
-from models import User, Store, Category, Product, History, ProductCategory, ProductStore
+from .models import User, Store, Category, Product, History, ProductCategory, ProductStore
 from pprint import pprint
 
 class BddQueries:
@@ -67,7 +67,7 @@ class BddQueries:
             if rec_choice == 'Y' or rec_choice == 'y':
                 query = (User.select().order_by(User.id.desc())
                 for index, value in enumerate(query):
-                    print index, value)
+                    print (index, value)
                 insert_history = History.insert(History.id == user_r.id, History.chosen_product == self.c_product, History.remplacement_product == self.proposed_product).execute()
                 print("Done ;-)!")
                 break
@@ -86,7 +86,6 @@ class BddQueries:
             print("You have", len(query_history), "recorded products!")
             for index, value in enumerate(query_history):
                 print (index, value )
-                categories_index_list.append(index)
             break
 
 if __name__ == "__main__":
