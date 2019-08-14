@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
-import sys
-sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\data')
-sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\body')
-from interface_bdd import BddQueries
+from body.interface_bdd import BddQueries
 from data.updateBDD import InsertOrDeleteData
 from data.models import User
 from pprint import pprint

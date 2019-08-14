@@ -1,7 +1,4 @@
-import sys
-sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\data')
-sys.path.append(r'C:\Users\loupy\OneDrive\Bureau\OPENCLASSROOMS\Projet5\PurBeurre\body')
-from models import User, Store, Category, Product, History, ProductCategory, ProductStore
+from data.models import User, Store, Category, Product, History, ProductCategory, ProductStore
 from pprint import pprint
 
 class BddQueries:
@@ -75,14 +72,7 @@ class BddQueries:
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 c_user = (User.select().order_by(User.id.desc().limit(1))
-                print(c_user)
-
-                insert_hstory = Insert(History,  id_id = c_user,
-                 chosen_product = self.c_produc
-                  remplacement_product = self.proposed_product )
-                insert_history.execute()
-     
-
+                result = History.insert(id = c_user.id , _id = self.c_product._id, _id = self.proposed_product._id).execute()
                 print("Done ;-)!")
                 
                 break
