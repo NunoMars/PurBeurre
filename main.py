@@ -3,7 +3,6 @@
 from body.interface_bdd import BddQueries
 from data.updateBDD import InsertOrDeleteData
 from data.models import User
-from pprint import pprint
 """
 Main page of the program.
 """
@@ -11,17 +10,19 @@ Main page of the program.
 print("WELCOME, I will be able to help you find equivalent products.")
 name = input("Let's know us first. What is your name?")
 result = User.insert(u_name=name).execute()
-print("I",name,"!")
+print("I", name, "!")
 print("Select one of those three choises please!!")
 
 while True:
-    main_choice = input(" 1 - Which food do you want to replace?\n 2 - Find my substituted foods.\n 3 - Update the food-database!\n 4 - To quit!\n What is your choice")
+    main_choice = input(" 1 - Which food do you want to replace?\n\
+         2 - Find my substituted foods.\n\
+              3 - Update the food-database!\n\
+                   4 - To quit!\n What is your choice")
     if main_choice == '1':
         BddQueries.Choice_categories(BddQueries)
         BddQueries.Choice_products(BddQueries)
-        BddQueries.rec_current_products(BddQueries)   
-      
-            
+        BddQueries.rec_current_products(BddQueries)
+
     if main_choice == '2':
         BddQueries.choice_2(BddQueries)
 
@@ -36,4 +37,3 @@ while True:
 
 if __name__ == "__main__":
     pass
-

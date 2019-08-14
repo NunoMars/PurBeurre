@@ -1,66 +1,84 @@
-from data.models import User, Store, Category, Product, History, ProductCategory, ProductStore
-from pprint import pprint
+from data.models import User,
+Store,
+Category,
+Product,
+History,
+ProductCategory,
+ProductStore
+
 
 class BddQueries:
+
     c_product = []
     proposed_product = []
-    
-    
+
     def Choice_categories(self):
-        
+        """
+        Def to propose the ctegories
+        """               
         while True:
-            categories_index_list =[]
+            categories_index_list = []
             p_categories = Category.select().execute()
             print("I propose you", len(p_categories), "categories!")
             for index, value in enumerate(p_categories):
-                print (index, value )
+                print(index, value)
                 categories_index_list.append(index)
             print("Select one category please!", categories_index_list)
             try:
-                cat_choice =int(input(" Which category do you want to chose?"))
+                cat_choice = int(input(" Which category do you\
+                     want to chose?"))
                 if cat_choice in categories_index_list:
                     self.c_category = p_categories[cat_choice]
-                    print( "You have chosen", self.c_category, "!")
+                    print("You have chosen", self.c_category, "!")
                     break
                 else:
-                    continue 
+                    continue
                 pass
             except ValueError:
                 continue
-    
-    def Choice_products(self):            
+
+    def Choice_products(self):
+        """
+        Def to propose 25 products.
+        """            
         while True:
             product_categorie_index_list = []
-            query_products_categorie = (Product.select().join(ProductCategory).join(Category)
-            .where(Category.categories == self.c_category).limit(25))
+            query_products_categorie = (Product.select().join(ProductCategory).join(Category).where(Category.categories == self.c_category).limit(25))
 
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
                 product_categorie_index_list.append(index)
-            print("Select one product please please!\n", product_categorie_index_list)
+            print("Select one product please\
+                 please!\n", product_categorie_index_list)
             try:
-                product_choice =int(input(" Which product do you want to chose?"))
+                product_choice = int(input(" Which product do you \n\
+                    want to chose?"))
                 if product_choice in product_categorie_index_list:
                     self.c_product = query_products_categorie[product_choice]
-                    print( "You have chosen", self.c_product.product_name_fr, "!")
+                    print("You have chosen", self.c_product.product_name_fr, "!")
 
-                    print(" Is Id:",self.c_product._id,"\n Namne:",
-                     self.c_product.product_name_fr,"\n Web-page:",self.c_product.url,
-                     "\n Ingredients :", self.c_product.ingredients_text_fr)
+                    print(" Is Id:", self.c_product._id, "\n Namne:",
+                    self.c_product.product_name_fr, "\n Web-page:",
+                    self.c_product.url,
+                    "\n Ingredients :", self.c_product.ingredients_text_fr)
                     pass
                 else:
                     continue
                 pass
             except ValueError:
                 continue
-            query_proposed_product = (Product.select().join(ProductCategory).join(Category)
-            .where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category)).limit(1))
+            query_proposed_product = (Product.select().join(ProductCategory).join(Category).where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category)).limit(1))
+
             self.proposed_product = query_proposed_product[0]
 
             print("I've found a equivalent product It's:\n Is Id:",
-            self.proposed_product._id,"\n Namne:", self.proposed_product.product_name_fr,
-            "\n Web-page:",self.proposed_product.url,"\n Ingredients :",
-             self.proposed_product.ingredients_text_fr)
+            self.proposed_product._id,
+            "\n Namne:",
+             self.proposed_product.product_name_fr,
+            "\n Web-page:",
+            self.proposed_product.url,
+            "\n Ingredients :",
+            self.proposed_product.ingredients_text_fr)
             break
 
     def rec_current_products(self):
@@ -68,13 +86,17 @@ class BddQueries:
         Record the product in dbb
         """      
         while True:
-            rec_choice = input("Do you want's record this chice to the DataBase?\n(Y) or (N)")
+            rec_choice = input("Do you want's record this\
+                 chice to the DataBase?\n(Y) or (N)")
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 c_user = (User.select().order_by(User.id.desc().limit(1))
-                result = History.insert(id = c_user.id , _id = self.c_product._id, _id = self.proposed_product._id).execute()
+                h_create = (History(id_id = BddQueries.c_user.id,
+                chosen_product_id = BddQueries.c_product,
+                remplacement_product_id = BddQueries.proposed_product))
+                h_create.save()
+
                 print("Done ;-)!")
-                
                 break
             else:
                 break
@@ -85,6 +107,9 @@ class BddQueries:
             continue
 
     def choice_2(self):
+        """
+        Def to consulte the history recs.
+        """
         while True:
             query_history=History.select()
             history_index_list =[]

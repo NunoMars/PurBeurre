@@ -1,4 +1,5 @@
 import peewee
+from .interface_bdd import BddQueries
 
 pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',
                            host='localhost', port=5432) # Connect to data base.
