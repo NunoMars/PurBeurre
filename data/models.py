@@ -1,6 +1,4 @@
 import peewee
-"""from download_products import DataFiles"""
-
 
 pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',
                            host='localhost', port=5432) # Connect to data base.
@@ -9,6 +7,7 @@ pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12
 """
 Defines and create tables.
 """
+
 class User(peewee.Model):
     """ Class to define the User table."""
     id = peewee.PrimaryKeyField()
@@ -53,7 +52,7 @@ class History(peewee.Model):
     remplacement_product = peewee.ForeignKeyField(Product, backref='history')
 
     class Meta:
-        primary_key = peewee.CompositeKey('id', 'chosen_product')                
+        primary_key = peewee.CompositeKey('id')                
         database = pg_db
         db_table = 'history'
 
