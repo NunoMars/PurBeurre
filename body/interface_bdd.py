@@ -1,10 +1,10 @@
-from data.models import User,
+from data.models import (User,
 Store,
 Category,
 Product,
 History,
 ProductCategory,
-ProductStore
+ProductStore)
 
 
 class BddQueries:
@@ -91,10 +91,7 @@ class BddQueries:
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 c_user = (User.select().order_by(User.id.desc().limit(1))
-                h_create = (History(id_id = BddQueries.c_user.id,
-                chosen_product_id = BddQueries.c_product,
-                remplacement_product_id = BddQueries.proposed_product))
-                h_create.save()
+                result = (History.insert(id_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
 
                 print("Done ;-)!")
                 break
@@ -121,5 +118,5 @@ class BddQueries:
 if __name__ == "__main__":
     BddQueries.Choice_categories(BddQueries)
     BddQueries.Choice_products(BddQueries)
-    BddQueries.choice_2(BddQueries)
     BddQueries.rec_current_products(BddQueries)
+    BddQueries.choice_2(BddQueries)
