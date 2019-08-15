@@ -1,3 +1,5 @@
+import sys
+sys.path.append("C:\\data")
 import peewee
 
 pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',

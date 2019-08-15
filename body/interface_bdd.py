@@ -1,3 +1,5 @@
+import sys
+sys.path.append("C:\\data")
 from data.models import (User,
 Store,
 Category,
@@ -90,7 +92,9 @@ class BddQueries:
                  chice to the DataBase?\n(Y) or (N)")
 
             if rec_choice == 'Y' or rec_choice == 'y':
-                c_user = (User.select().order_by(User.id.desc().limit(1))
+                query_user = User.select().order_by(User.id.desc()).limit(1)
+                c_user = query_user[0]
+                print(c_user.u_name)
                 result = (History.insert(id_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
 
                 print("Done ;-)!")

@@ -1,5 +1,7 @@
+import sys
+sys.path.append("C:\\data")
 from collections import OrderedDict
-from pprint import pprint
+
 class CleanFile:
     """
     Class to filter the data.
