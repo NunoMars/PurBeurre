@@ -47,8 +47,8 @@ class Product(peewee.Model):
 
 class History(peewee.Model):
     """ Class to define the History table."""
-    id = peewee.ForeignKeyField( User, backref='history')
-    chosen_product = peewee.ForeignKeyField( Product, backref='history')
+    id = peewee.ForeignKeyField(User, backref='history')
+    chosen_product = peewee.ForeignKeyField(Product, backref='history')
     remplacement_product = peewee.ForeignKeyField(Product, backref='history')
 
     class Meta:
@@ -58,8 +58,8 @@ class History(peewee.Model):
 
 class ProductCategory(peewee.Model):
     """ Class to define the Product category table."""
-    _id = peewee.ForeignKeyField ( Product, backref='product_category')
-    categories = peewee.ForeignKeyField ( Category, backref='product_category')
+    _id = peewee.ForeignKeyField (Product, backref='product_category')
+    categories = peewee.ForeignKeyField (Category, backref='product_category')
 
     class Meta:
         primary_key = peewee.CompositeKey('_id', 'categories')                
@@ -68,7 +68,7 @@ class ProductCategory(peewee.Model):
 
 class ProductStore(peewee.Model):
     """ Class to define the Product Store table."""
-    _id = peewee.ForeignKeyField( Product, backref='product_store')
+    _id = peewee.ForeignKeyField(Product, backref='product_store')
     stores_tags = peewee.ForeignKeyField(Store, backref='product-store')
 
     class Meta:
