@@ -1,7 +1,7 @@
 import sys
 sys.path.append("C:\\data")
 import requests, json
-from clear_data import CleanFile
+from .clear_data import CleanFile
 
 class DataFiles:
     """

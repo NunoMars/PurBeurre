@@ -13,7 +13,7 @@ Defines and create tables.
 class User(peewee.Model):
     """ Class to define the User table."""
     id = peewee.PrimaryKeyField()
-    u_name = peewee.CharField()
+    u_name = peewee.CharField(unique=True)
 
     class Meta:
         database = pg_db

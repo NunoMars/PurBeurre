@@ -1,6 +1,6 @@
 import sys
 sys.path.append("C:\\data")
-from data.models import (User,
+from .data.models import (User,
 Store,
 Category,
 Product,
@@ -13,6 +13,24 @@ class BddQueries:
 
     c_product = []
     proposed_product = []
+
+
+    def meeting_user(self):
+        print("WELCOME, I will be able to help you to find a equivalent product.")
+        while True:
+            try:
+                self.user_name = input("Let's know us first. What's your name?")
+                result = User.insert(u_name=self.user_name).execute()
+                break
+            except:
+                user_choice = input("Your name is allready in DataBase do you whant to do?\n\
+                    Press [C] continue or [ENTER] to enter a new name?")
+                if user_choice == "C" or user_choice == "c":
+                    break
+                else:
+                    continue
+        print("Hi", self.user_name, "!")            
+
 
     def Choice_categories(self):
         """
@@ -27,8 +45,7 @@ class BddQueries:
                 categories_index_list.append(index)
             print("Select one category please!", categories_index_list)
             try:
-                cat_choice = int(input(" Which category do you\
-                     want to chose?"))
+                cat_choice = int(input(" Which category do you want to chose?"))
                 if cat_choice in categories_index_list:
                     self.c_category = p_categories[cat_choice]
                     print("You have chosen", self.c_category, "!")
@@ -50,15 +67,12 @@ class BddQueries:
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
                 product_categorie_index_list.append(index)
-            print("Select one product please\
-                 please!\n", product_categorie_index_list)
+            print("Select one product please!", product_categorie_index_list)
             try:
-                product_choice = int(input(" Which product do you \n\
-                    want to chose?"))
+                product_choice = int(input(" Which product do you want to chose?"))
                 if product_choice in product_categorie_index_list:
                     self.c_product = query_products_categorie[product_choice]
                     print("You have chosen", self.c_product.product_name_fr, "!")
-
                     print(" Is Id:", self.c_product._id, "\n Namne:",
                     self.c_product.product_name_fr, "\n Web-page:",
                     self.c_product.url,
@@ -88,13 +102,11 @@ class BddQueries:
         Record the product in dbb
         """      
         while True:
-            rec_choice = input("Do you want's record this\
-                 chice to the DataBase?\n(Y) or (N)")
+            rec_choice = input("Do you want's record it?\n\(Y) or (N)")
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 query_user = User.select().order_by(User.id.desc()).limit(1)
                 c_user = query_user[0]
-                print(c_user.u_name)
                 result = (History.insert(id_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
 
                 print("Done ;-)!")
