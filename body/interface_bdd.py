@@ -1,6 +1,7 @@
 import sys
 sys.path.append("C:\\data")
-from .data.models import (User,
+from peewee import fn
+from data.models import (User,
 Store,
 Category,
 Product,
@@ -17,18 +18,8 @@ class BddQueries:
 
     def meeting_user(self):
         print("WELCOME, I will be able to help you to find a equivalent product.")
-        while True:
-            try:
-                self.user_name = input("Let's know us first. What's your name?")
-                result = User.insert(u_name=self.user_name).execute()
-                break
-            except:
-                user_choice = input("Your name is allready in DataBase do you whant to do?\n\
-                    Press [C] continue or [ENTER] to enter a new name?")
-                if user_choice == "C" or user_choice == "c":
-                    break
-                else:
-                    continue
+        self.user_name = input("Let's know us first. What's your name?")
+        user, u_name = User.get_or_create(u_name=self.user_name)
         print("Hi", self.user_name, "!")            
 
 
@@ -62,7 +53,7 @@ class BddQueries:
         """            
         while True:
             product_categorie_index_list = []
-            query_products_categorie = (Product.select().join(ProductCategory).join(Category).where(Category.categories == self.c_category).limit(25))
+            query_products_categorie = (Product.select().join(ProductCategory).join(Category).where(Category.categories == self.c_category).order_by(fn.Random()).limit(25))
 
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
@@ -83,7 +74,7 @@ class BddQueries:
                 pass
             except ValueError:
                 continue
-            query_proposed_product = (Product.select().join(ProductCategory).join(Category).where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category)).limit(1))
+            query_proposed_product = (Product.select().join(ProductCategory).join(Category).where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category)).order_by(fn.Random()).limit(1))
 
             self.proposed_product = query_proposed_product[0]
 
@@ -107,7 +98,7 @@ class BddQueries:
             if rec_choice == 'Y' or rec_choice == 'y':
                 query_user = User.select().order_by(User.id.desc()).limit(1)
                 c_user = query_user[0]
-                result = (History.insert(id_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
+                result = (History.insert(_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
 
                 print("Done ;-)!")
                 break
@@ -124,8 +115,9 @@ class BddQueries:
         Def to consulte the history recs.
         """
         while True:
-            query_history=History.select()
-            history_index_list =[]
+            query_user = User.select().order_by(User.id.desc()).limit(1)
+            c_user = query_user[0]
+            query_history = (History.get((_id == c_user.id))
             print("You have", len(query_history), "recorded products!")
             for index, value in enumerate(query_history):
                 print (index, value )

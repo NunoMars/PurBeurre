@@ -5,7 +5,6 @@ sys.path.append("C:\\data")
 sys.path.append("C:\\body")
 from body.interface_bdd import BddQueries
 from data.updateBDD import InsertOrDeleteData
-from data.models import User
 
 class MainPaje:
     """
@@ -16,10 +15,10 @@ class MainPaje:
 
     while True:
         main_choice = input(" 1 - Which food do you want to replace?\n\
-        2 - Find my substituted foods.\n\
-        3 - Update the food-database!\n\
-        4 - To quit!\n\
-        What is your choice")
+    2 - Find my substituted foods.\n\
+    3 - Update the food-database!\n\
+    4 - To quit!\n\
+    What is your choice? [1], [2], [3], [4]")
 
         if main_choice == '1':
             BddQueries.Choice_categories(BddQueries)

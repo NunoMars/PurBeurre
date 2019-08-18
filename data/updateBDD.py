@@ -33,6 +33,9 @@ class InsertOrDeleteData:
         
                 query3 = Product.delete()
                 d = query3.execute()
+
+                query7 = History.delete()
+                h = query7.execute()
         
                 """
                 Import the products from download_products

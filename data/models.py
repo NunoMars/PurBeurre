@@ -1,8 +1,6 @@
-import sys
-sys.path.append("C:\\data")
-import peewee
+from peewee import *
 
-pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',
+pg_db = PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12345678',
                            host='localhost', port=5432) # Connect to data base.
 
 
@@ -10,71 +8,71 @@ pg_db = peewee.PostgresqlDatabase('Pure_Beurre', user='PureBeurre', password='12
 Defines and create tables.
 """
 
-class User(peewee.Model):
+class User(Model):
     """ Class to define the User table."""
-    id = peewee.PrimaryKeyField()
-    u_name = peewee.CharField(unique=True)
+    id = PrimaryKeyField()
+    u_name = CharField(unique=True)
 
     class Meta:
         database = pg_db
         db_table = 'user'
 
-class Store(peewee.Model):
+class Store(Model):
     """ Class to define the Store table."""
-    stores_tags = peewee.CharField(primary_key=True)
+    stores_tags = CharField(primary_key=True)
 
     class Meta:                
         database = pg_db
         db_table = 'store'
 
-class Category(peewee.Model):
+class Category(Model):
     """ Class to define the Category table."""    
-    categories = peewee.CharField(primary_key=True)
+    categories = CharField(primary_key=True)
 
     class Meta:                
         database = pg_db
         db_table = 'category'
 
-class Product(peewee.Model):
+class Product(Model):
     """ Class to define the Product table."""
-    _id = peewee.CharField(primary_key=True)
-    ingredients_text_fr = peewee.TextField()
-    nutrition_grade_fr = peewee.CharField()
-    product_name_fr = peewee.TextField()
-    url = peewee.TextField()
+    _id = CharField(primary_key=True)
+    ingredients_text_fr = TextField()
+    nutrition_grade_fr = CharField()
+    product_name_fr = TextField()
+    url = TextField()
 
     class Meta:                
         database = pg_db
         db_table = 'product'
 
-class History(peewee.Model):
+class History(Model):
     """ Class to define the History table."""
-    id = peewee.ForeignKeyField(User, backref='history')
-    chosen_product = peewee.ForeignKeyField(Product, backref='history')
-    remplacement_product = peewee.ForeignKeyField(Product, backref='history')
+    id = PrimaryKeyField()
+    _id = ForeignKeyField(User, backref='history')
+    chosen_product = ForeignKeyField(Product, backref='history')
+    remplacement_product = ForeignKeyField(Product, backref='history')
 
-    class Meta:
-        primary_key = peewee.CompositeKey('id')                
+    class Meta:          
         database = pg_db
         db_table = 'history'
 
-class ProductCategory(peewee.Model):
+class ProductCategory(Model):
     """ Class to define the Product category table."""
-    _id = peewee.ForeignKeyField (Product, backref='product_category')
-    categories = peewee.ForeignKeyField (Category, backref='product_category')
+    _id = ForeignKeyField (Product, backref='product_category')
+    categories = ForeignKeyField (Category, backref='product_category')
 
     class Meta:
-        primary_key = peewee.CompositeKey('_id', 'categories')                
+        primary_key = CompositeKey('_id', 'categories')                
         database = pg_db
         db_table = 'product_category'
 
-class ProductStore(peewee.Model):
+class ProductStore(Model):
     """ Class to define the Product Store table."""
-    _id = peewee.ForeignKeyField(Product, backref='product_store')
-    stores_tags = peewee.ForeignKeyField(Store, backref='product-store')
+    _id = ForeignKeyField(Product, backref='product_store')
+    stores_tags = ForeignKeyField(Store, backref='product-store')
 
     class Meta:
-        primary_key = peewee.CompositeKey('_id', 'stores_tags')                
+        primary_key = CompositeKey('_id', 'stores_tags')                
         database = pg_db
         db_table = 'product_store'
 
