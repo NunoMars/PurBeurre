@@ -117,9 +117,11 @@ class BddQueries:
         while True:
             query_user = User.select().order_by(User.id.desc()).limit(1)
             c_user = query_user[0]
-            query_history = (History.get().join(Product).join(User).where(History.id == c_user.id))
-            print("You have", len(query_history), "recorded products!")
-            for index, value in enumerate(query_history):
+            query = History.select(History.chosen_product, History.remplacement_product).join(User).join(Product).where(User.id == c_user.id).execute()
+            for (content, username) in cursor:
+                print(username, '->', content)
+            print("You have", len(query), "recorded products!")
+            for index, value in enumerate(query):
                 print (index, value )
             break
 
