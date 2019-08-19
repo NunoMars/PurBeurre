@@ -137,7 +137,7 @@ class BddQueries:
             .join(remplacement_product, on=(History.remplacement_product == remplacement_product._id))
             .join(User, on=(History._id == User.id))
             .where(History._id == c_user.id))
-            print("You have", len(query), "recorded products!")
+            print(c_user.u_name,"You have", len(query), "recorded products!")
             for item in query:
                 query1 = Product.select().where(Product._id == item.chosen_product._id)
 
