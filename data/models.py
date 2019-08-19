@@ -49,8 +49,8 @@ class History(Model):
     """ Class to define the History table."""
     id = PrimaryKeyField()
     _id = ForeignKeyField(User, backref='history')
-    chosen_product = ForeignKeyField(Product, backref='history')
-    remplacement_product = ForeignKeyField(Product, backref='history')
+    chosen_product = ForeignKeyField(Product, related_name = 'chosen_product ', backref='history')
+    remplacement_product = ForeignKeyField(Product, related_name = 'remplacement_product', backref='history')
 
     class Meta:          
         database = pg_db

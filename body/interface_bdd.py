@@ -53,7 +53,11 @@ class BddQueries:
         """            
         while True:
             product_categorie_index_list = []
-            query_products_categorie = (Product.select().join(ProductCategory).join(Category).where(Category.categories == self.c_category).order_by(fn.Random()).limit(25))
+            query_products_categorie = (Product.select()
+            .join(ProductCategory)
+            .join(Category)
+            .where(Category.categories == self.c_category)
+            .order_by(fn.Random()).limit(25))
 
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
@@ -74,7 +78,10 @@ class BddQueries:
                 pass
             except ValueError:
                 continue
-            query_proposed_product = (Product.select().join(ProductCategory).join(Category).where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category)).order_by(fn.Random()).limit(1))
+            query_proposed_product = (Product.select()
+            .join(ProductCategory).join(Category)
+            .where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category))
+            .order_by(fn.Random()).limit(1))
 
             self.proposed_product = query_proposed_product[0]
 
@@ -97,8 +104,12 @@ class BddQueries:
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 query_user = User.select().order_by(User.id.desc()).limit(1)
+
                 c_user = query_user[0]
-                result = (History.insert(_id = c_user.id, chosen_product_id = self.c_product._id, remplacement_product_id = self.proposed_product._id).execute())
+                result = (History.insert(_id = c_user.id,
+                 chosen_product_id = self.c_product._id,
+                 remplacement_product_id = self.proposed_product._id)
+                 .execute())
 
                 print("Done ;-)!")
                 break
@@ -117,12 +128,22 @@ class BddQueries:
         while True:
             query_user = User.select().order_by(User.id.desc()).limit(1)
             c_user = query_user[0]
-            query = History.select(History.chosen_product, History.remplacement_product).join(User).join(Product).where(User.id == c_user.id).execute()
-            for (content, username) in cursor:
-                print(username, '->', content)
+            chosen_product = Product.alias()
+            remplacement_product = Product.alias()
+            query = (History
+            .select(History, chosen_product, remplacement_product, User)
+            .join(chosen_product, on=(History.chosen_product == chosen_product._id))
+            .switch(History)
+            .join(remplacement_product, on=(History.remplacement_product == remplacement_product._id))
+            .join(User, on=(History._id == User.id))
+            .where(History._id == c_user.id))
             print("You have", len(query), "recorded products!")
-            for index, value in enumerate(query):
-                print (index, value )
+            for item in query:
+                query1 = Product.select().where(Product._id == item.chosen_product._id)
+
+                query2 = Product.select().where(Product._id == item.remplacement_product._id)
+
+                print("PRODUCT CHOOSEN:", query1[0].product_name_fr,"REMPLACED BY:", query2[0].product_name_fr)
             break
 
 if __name__ == "__main__":
