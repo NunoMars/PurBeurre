@@ -126,6 +126,7 @@ class BddQueries:
             break
 
 if __name__ == "__main__":
+    BddQueries.meeting_user(BddQueries)
     BddQueries.Choice_categories(BddQueries)
     BddQueries.Choice_products(BddQueries)
     BddQueries.rec_current_products(BddQueries)
