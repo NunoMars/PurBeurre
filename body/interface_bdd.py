@@ -11,6 +11,9 @@ ProductStore)
 
 
 class BddQueries:
+    """
+    Interface and body of the program.
+    """
 
     c_product = []
     proposed_product = []
@@ -49,7 +52,7 @@ class BddQueries:
 
     def Choice_products(self):
         """
-        Def to propose 25 products.
+        Def to propose 25 random products.
         """            
         while True:
             product_categorie_index_list = []
@@ -128,7 +131,7 @@ class BddQueries:
         while True:
             query_user = User.select().where(User.u_name == self.user_name)
             c_user = query_user[0]
-            
+
             chosen_product = Product.alias()
             remplacement_product = Product.alias()
 
