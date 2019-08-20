@@ -128,8 +128,10 @@ class BddQueries:
         while True:
             query_user = User.select().where(User.u_name == self.user_name)
             c_user = query_user[0]
+            
             chosen_product = Product.alias()
             remplacement_product = Product.alias()
+
             query = (History
             .select(History, chosen_product, remplacement_product, User)
             .join(chosen_product, on=(History.chosen_product == chosen_product._id))
