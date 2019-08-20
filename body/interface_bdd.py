@@ -126,7 +126,7 @@ class BddQueries:
         Def to consulte the history recs.
         """
         while True:
-            query_user = User.select().order_by(User.id.desc()).limit(1)
+            query_user = User.select().where(User.u_name == self.user_name)
             c_user = query_user[0]
             chosen_product = Product.alias()
             remplacement_product = Product.alias()
@@ -137,6 +137,7 @@ class BddQueries:
             .join(remplacement_product, on=(History.remplacement_product == remplacement_product._id))
             .join(User, on=(History._id == User.id))
             .where(History._id == c_user.id))
+
             print(c_user.u_name,"You have", len(query), "recorded products!")
             for item in query:
                 query1 = Product.select().where(Product._id == item.chosen_product._id)
