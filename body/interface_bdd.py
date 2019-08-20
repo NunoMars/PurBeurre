@@ -136,10 +136,14 @@ class BddQueries:
             remplacement_product = Product.alias()
 
             query = (History
-            .select(History, chosen_product, remplacement_product, User)
-            .join(chosen_product, on=(History.chosen_product == chosen_product._id))
+            .select(History,
+             chosen_product,
+              remplacement_product, User)
+            .join(chosen_product,
+             on=(History.chosen_product == chosen_product._id))
             .switch(History)
-            .join(remplacement_product, on=(History.remplacement_product == remplacement_product._id))
+            .join(remplacement_product,
+             on=(History.remplacement_product == remplacement_product._id))
             .join(User, on=(History._id == User.id))
             .where(History._id == c_user.id))
 
@@ -149,7 +153,9 @@ class BddQueries:
 
                 query2 = Product.select().where(Product._id == item.remplacement_product._id)
 
-                print("PRODUCT CHOOSEN:", query1[0].product_name_fr,"REMPLACED BY:", query2[0].product_name_fr)
+                print("PRODUCT CHOOSEN:",
+                 query1[0].product_name_fr,
+                 "REMPLACED BY:", query2[0].product_name_fr)
             break
 
 if __name__ == "__main__":
