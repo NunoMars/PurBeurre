@@ -14,11 +14,11 @@ class MainPaje:
     BddQueries.meeting_user(BddQueries)
 
     while True:
-        main_choice = input(" 1 - Which food do you want to replace?\n\
-    2 - Find my substituted foods.\n\
-    3 - Update the food-database!\n\
-    4 - To quit!\n\
-    What is your choice? [1], [2], [3], [4]")
+        main_choice = input(" 1 - Quel aliment voulez-vous remplacer?\n\
+    2 - Trouver mes aliments substitués.\n\
+    3 - Mettre à jour la base de données!\n\
+    4 - Quitter!\n\
+    Quel est votre choix? [1], [2], [3], [4]")
 
         if main_choice == '1':
             BddQueries.Choice_categories(BddQueries)
@@ -32,7 +32,7 @@ class MainPaje:
             InsertOrDeleteData.update_all_products()
             pass
         if main_choice == "4":
-            print("See you soon! ;-) ")
+            print("À bientôt! ;-) ")
             break
         else:
             continue

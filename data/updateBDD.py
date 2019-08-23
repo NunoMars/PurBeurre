@@ -13,9 +13,9 @@ class InsertOrDeleteData:
         Delete all products in dbb
         """        
         while True:
-            main_choice = input("Do you realy want's to update the DataBase?\n(Y) or (N)")
+            main_choice = input("Voulez-vous vraiment mettre à jour la base de données?\n(Y) or (N)")
             if main_choice == 'Y' or main_choice == 'y':
-                print("Clearing all tables!!!") 
+                print("Effacement de toutes les tables!!!") 
                 query5 = ProductCategory.delete()
                 f = query5.execute()
         
@@ -34,8 +34,6 @@ class InsertOrDeleteData:
                 query3 = Product.delete()
                 d = query3.execute()
 
-                query7 = History.delete()
-                h = query7.execute()
         
                 """
                 Import the products from download_products
@@ -59,13 +57,13 @@ class InsertOrDeleteData:
                 """
                 Insert all products in database
                 """
-                print("Insertint all new products!")
+                print("Insérons tous les nouveaux produits!")
                 Category.insert_many(categories).execute()
                 Store.insert_many(stores_tags).execute()
                 Product.insert_many(products_to_inser).execute()
                 ProductCategory.insert_many(_id_and_categories).execute()
                 ProductStore.insert_many(_id_and_stores).execute()
-                print("The DataBase is updated!")
+                print("La base de données est mise à jour!")
                 break
             else:
                 break

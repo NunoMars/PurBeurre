@@ -20,8 +20,7 @@ class DataFiles:
     _id_and_categories = []
 
     def __init__ (self):
-        pass
-    print( "Importation started let's do some work now!")
+        print("L'importation a commencé, commençons le travail maintenant!")
 
     def download_and_clean_snacks(self):
         """
@@ -31,9 +30,9 @@ class DataFiles:
         link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"    
         r = requests.get(link1)
         self.snacks = json.loads(r.content)# rec the data in a variable
-        print("We have now 1000 products downloaded!")
+        print("Nous avons maintenant 1000 produits téléchargés!")
         self.snacks = CleanFile.clean_data(self.snacks) # cleanup the data
-        print("We have now ", len( self.snacks ), "snacks downloaded and cleaned!")
+        print("Nous avons ", len( self.snacks ),"collations téléchargées et nettoyées!")
 
 
     def download_and_clean_pizzas(self):        
@@ -44,9 +43,9 @@ class DataFiles:
         link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link2)
         self.pizzas = json.loads(r.content)# rec the data in a variable
-        print("We have now 1000 products downloaded!")
+        print("Nous avons maintenant plus 1000 produits téléchargés!")
         self.pizzas = CleanFile.clean_data(self.pizzas)
-        print("We have now", len(self.pizzas), "pizzas downloaded and cleaned!")
+        print("Nous avons", len(self.pizzas), "pizzas téléchargées et nettoyées!")
 
     def download_and_clean_drinks(self):
         """
@@ -56,9 +55,9 @@ class DataFiles:
         link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link3)
         self.drinks = json.loads(r.content)
-        print("We have now 3000 products downloaded!")
+        print("Nous avons maintenant plus 1000 produits téléchargés!")
         self.drinks = CleanFile.clean_data(self.drinks)
-        print("We have now", len( self.drinks ), "dinks downloaded and cleaned!")
+        print("Nous avons", len( self.drinks ), "boissons téléchargées et nettoyées!")
 
     def download_and_clean_cheese(self):
         """
@@ -68,9 +67,9 @@ class DataFiles:
         link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=fromages&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link4)
         self.cheese = json.loads(r.content)
-        print("We have now 4000 products downloaded!")
+        print("Nous avons maintenant plus 1000 produits téléchargés!")
         self.cheese = CleanFile.clean_data(self.cheese)
-        print("We have now", len( self.cheese ), "cheese downloaded and cleaned!")
+        print("Nous avons", len( self.cheese ), "fromages téléchargées et nettoyées!")
 
     def download_and_clean_pasta(self):
         """
@@ -80,9 +79,9 @@ class DataFiles:
         link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pâtes&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link5)
         self.pasta = json.loads(r.content)
-        print("We have now 5000 products downloaded! Now let's clean them ;-) !")
+        print("Nous avons maintenant 5000 produits téléchargés! Maintenant, nettoyons-les ;-) !")
         self.pasta = CleanFile.clean_data(self.pasta)
-        print("We have now", len(self.pasta), "pasta downloaded, and cleaned!")
+        print("Nous avons", len(self.pasta), "pâtes téléchargées et nettoyées!")
       
     def add_and_clean_all_products(self):
         """
@@ -100,7 +99,9 @@ class DataFiles:
             self.all_products.extend(self.pasta)
 
         self.all_products = CleanFile.eliminate_duplicate_products(self.all_products)
-        print("After a hard cleaning job we have", len(self.all_products), "good products! let's put them in the Data_Base!")
+        print("Après un dur travail de nettoyage, nous avons",
+         len(self.all_products),
+         "bons produits! Mettons-les dans la base de données!")
 
     def add_and_clean_products_to_inser(self):
         """
@@ -108,7 +109,7 @@ class DataFiles:
         """
 
         self.products_to_inser = CleanFile.products_to_inser(self.all_products) 
-        print(len(self.products_to_inser), "Products are ready to insert.")
+        print(len(self.products_to_inser), " produits sont prêts à être insérés.")
 
 
     def add_and_clean_all_categories(self):
@@ -116,21 +117,21 @@ class DataFiles:
         Modul to prepare categories-file to insert in database.
         """ 
         self.categories = CleanFile.select_categories(self.all_products)
-        print("We have ", len(self.categories),"categories!")
+        print("Nous avous, à présent ", len(self.categories),"categories!")
 
     def add_and_clean_all_stores(self):
         """
         Modul to prepare stores-file to insert in database.
         """
         self.stores_tags = CleanFile.select_stores_tags(self.all_products)
-        print("Wee have ", len(self.stores_tags),"stores!")
+        print("Nous avous aussi ", len(self.stores_tags),"magasins!")
 
     def add_and_clean_all_id_and_stores(self):
         """
         Modul to prepare id_and_sores-file to insert in database.
         """ 
         self._id_and_stores = CleanFile.select_id_and_stores_tags(self.all_products)
-        print(len(self._id_and_stores), "Id and stores are ready to insert.")
+        print(len(self._id_and_stores), "Les identifiants et les magasins sont prêts à être insérés.")
 
 
     def add_and_clean_all_id_and_categories(self):
@@ -138,7 +139,7 @@ class DataFiles:
         Modul to prepare id_and_categorie-file to insert in database.
         """
         self._id_and_categories = CleanFile.select_id_and_categories(self.all_products)
-        print(len(self._id_and_categories), "Id and categories are ready to insert.")
+        print(len(self._id_and_categories),"Les identifiants et les catégories sont prêts à être insérés.")
 
 if __name__ == "__main__":
 

@@ -20,10 +20,10 @@ class BddQueries:
 
 
     def meeting_user(self):
-        print("WELCOME, I will be able to help you to find a equivalent product.")
-        self.user_name = input("Let's know us first. What's your name?")
+        print("BIENVENU/E, je peut vous aider à trouver un produit équivalent.")
+        self.user_name = input("Faisons d'habord connaiscance, quel est votre nom?")
         user, u_name = User.get_or_create(u_name=self.user_name)
-        print("Hi", self.user_name, "!")            
+        print("Salut", self.user_name, "!")            
 
 
     def Choice_categories(self):
@@ -33,16 +33,16 @@ class BddQueries:
         while True:
             categories_index_list = []
             p_categories = Category.select().execute()
-            print("I propose you", len(p_categories), "categories!")
+            print("Je vous propose", len(p_categories), "categories!")
             for index, value in enumerate(p_categories):
                 print(index, value)
                 categories_index_list.append(index)
-            print("Select one category please!", categories_index_list)
+            print("Sélectionnez une catégorie s'il vous plaît!", categories_index_list)
             try:
-                cat_choice = int(input(" Which category do you want to chose?"))
+                cat_choice = int(input("Quelle catégorie voulez-vous choisir?"))
                 if cat_choice in categories_index_list:
                     self.c_category = p_categories[cat_choice]
-                    print("You have chosen", self.c_category, "!")
+                    print("Vous avez selectionné", self.c_category, "!")
                     break
                 else:
                     continue
@@ -65,16 +65,16 @@ class BddQueries:
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
                 product_categorie_index_list.append(index)
-            print("Select one product please!", product_categorie_index_list)
+            print("Sélectionnez un produit s'il vous plaît!", product_categorie_index_list)
             try:
-                product_choice = int(input(" Which product do you want to chose?"))
+                product_choice = int(input("Quel produit voulez-vous choisir?"))
                 if product_choice in product_categorie_index_list:
                     self.c_product = query_products_categorie[product_choice]
-                    print("You have chosen", self.c_product.product_name_fr, "!")
-                    print(" Is Id:", self.c_product._id, "\n Namne:",
-                    self.c_product.product_name_fr, "\n Web-page:",
+                    print("Vous avez choisi", self.c_product.product_name_fr, "!")
+                    print(" Son identifiant est:", self.c_product._id, "\n Son nom:",
+                    self.c_product.product_name_fr, "\n Sa page internet:",
                     self.c_product.url,
-                    "\n Ingredients :", self.c_product.ingredients_text_fr)
+                    "\n ses ingredients :", self.c_product.ingredients_text_fr)
                     pass
                 else:
                     continue
@@ -88,13 +88,13 @@ class BddQueries:
 
             self.proposed_product = query_proposed_product[0]
 
-            print("I've found a equivalent product It's:\n Is Id:",
+            print("J'ai trouvé un produit équivalent C'est:\n Son identifiant:",
             self.proposed_product._id,
-            "\n Namne:",
+            "\n son nom:",
              self.proposed_product.product_name_fr,
-            "\n Web-page:",
+            "\n Sa page internet:",
             self.proposed_product.url,
-            "\n Ingredients :",
+            "\n Ses ingredients :",
             self.proposed_product.ingredients_text_fr)
             break
 
@@ -103,7 +103,7 @@ class BddQueries:
         Record the product in dbb
         """      
         while True:
-            rec_choice = input("Do you want's record it?\n\(Y) or (N)")
+            rec_choice = input("Voulez-vous enregistrer?\n\(Y) or (N)")
 
             if rec_choice == 'Y' or rec_choice == 'y':
                 query_user = User.select().order_by(User.id.desc()).limit(1)
@@ -114,7 +114,7 @@ class BddQueries:
                  remplacement_product_id = self.proposed_product._id)
                  .execute())
 
-                print("Done ;-)!")
+                print("Fait ;-)!")
                 break
             else:
                 break
@@ -147,15 +147,15 @@ class BddQueries:
             .join(User, on=(History._id == User.id))
             .where(History._id == c_user.id))
 
-            print(c_user.u_name,"You have", len(query), "recorded products!")
+            print(c_user.u_name,"Vous avez", len(query), "produits enregistrés!")
             for item in query:
                 query1 = Product.select().where(Product._id == item.chosen_product._id)
 
                 query2 = Product.select().where(Product._id == item.remplacement_product._id)
 
-                print("PRODUCT CHOOSEN:",
+                print("PORODUIT CHOISI:",
                  query1[0].product_name_fr,
-                 "REMPLACED BY:", query2[0].product_name_fr)
+                 "REMPLACE:", query2[0].product_name_fr)
             break
 
 if __name__ == "__main__":
