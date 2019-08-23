@@ -153,9 +153,9 @@ class BddQueries:
 
                 query2 = Product.select().where(Product._id == item.remplacement_product._id)
 
-                print("PORODUIT CHOISI:",
+                print("PRODUIT CHOISI:",
                  query1[0].product_name_fr,
-                 "REMPLACE:", query2[0].product_name_fr)
+                 "REMPLACE PAR:", query2[0].product_name_fr)
             break
 
 if __name__ == "__main__":

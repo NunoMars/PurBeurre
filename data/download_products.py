@@ -1,7 +1,7 @@
 import sys
 sys.path.append("C:\\data")
 import requests, json
-from .clear_data import CleanFile
+from clear_data import CleanFile
 
 class DataFiles:
     """
@@ -40,7 +40,7 @@ class DataFiles:
         Modul to download, clean and parse the products-file.
         """
        
-        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=500&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
         r = requests.get(link2)
         self.pizzas = json.loads(r.content)# rec the data in a variable
         print("Nous avons maintenant plus 1000 produits téléchargés!")
