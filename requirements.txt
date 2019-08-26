@@ -11,8 +11,6 @@ mccabe==0.6.1
 peewee==3.10.0
 pep8-naming==0.4.1
 prospector==1.1.6.2
-psycopg2==2.8.3
-py==1.8.0
 pycodestyle==2.4.0
 pydocstyle==3.0.0
 pyflakes==1.6.0
