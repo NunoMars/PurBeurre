@@ -19,6 +19,7 @@ pylint-celery==0.3
 pylint-django==2.0.2
 pylint-flask==0.5
 pylint-plugin-utils==0.5
+PyMySQL==0.9.3
 PyYAML==5.1.1
 requests==2.22.0
 requirements-detector==0.6
