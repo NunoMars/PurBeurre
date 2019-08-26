@@ -1,5 +1,3 @@
-import sys
-sys.path.append("C:\\data")
 from models import User, Store, Category, Product, History, ProductCategory, ProductStore
 from download_products import DataFiles
 from pprint import pprint

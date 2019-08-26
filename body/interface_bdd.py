@@ -1,5 +1,3 @@
-import sys
-sys.path.insert(0, "C:\\data")
 from peewee import fn
 from data.models import (User,
 Store,

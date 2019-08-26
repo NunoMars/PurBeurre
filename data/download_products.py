@@ -1,5 +1,3 @@
-import sys
-sys.path.append("C:\\data")
 import requests, json
 from clear_data import CleanFile
 

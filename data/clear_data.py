@@ -1,5 +1,3 @@
-import sys
-sys.path.append("C:\\data")
 from collections import OrderedDict
 
 class CleanFile:

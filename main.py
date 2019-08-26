@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
-import sys
-sys.path.append("C:\\data")
-sys.path.append("C:\\body")
+
 from body.interface_bdd import BddQueries
 from data.updateBDD import InsertOrDeleteData
 
