@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, 'C:\OPENCLASSROOMS\Projet5\PurBeurre\data')
+sys.path.insert(1, 'C:\OPENCLASSROOMS\Projet5\PurBeurre\body')
 from peewee import fn
 from data.models import (User,
 Store,
@@ -58,7 +61,7 @@ class BddQueries:
             .join(ProductCategory)
             .join(Category)
             .where(Category.categories == self.c_category)
-            .order_by(fn.Random()).limit(25))
+            .order_by(fn.Rand()).limit(25))
 
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
@@ -82,7 +85,7 @@ class BddQueries:
             query_proposed_product = (Product.select()
             .join(ProductCategory).join(Category)
             .where((Product.nutrition_grade_fr == self.c_product.nutrition_grade_fr) & (Category.categories == self.c_category))
-            .order_by(fn.Random()).limit(1))
+            .order_by(fn.Rand()).limit(1))
 
             self.proposed_product = query_proposed_product[0]
 
