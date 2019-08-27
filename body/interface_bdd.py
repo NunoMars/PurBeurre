@@ -35,10 +35,14 @@ class BddQueries:
             categories_index_list = []
             p_categories = Category.select().execute()
             print("Je vous propose", len(p_categories), "categories!")
+
             for index, value in enumerate(p_categories):
                 print(index, value)
                 categories_index_list.append(index)
-            print("Sélectionnez une catégorie s'il vous plaît!", categories_index_list)
+
+            print("Sélectionnez une catégorie s'il vous plaît!",
+             categories_index_list)
+
             try:
                 cat_choice = int(input("Quelle catégorie voulez-vous choisir?"))
                 if cat_choice in categories_index_list:
@@ -66,7 +70,9 @@ class BddQueries:
             for index, product in enumerate(query_products_categorie):
                 print(index, product.product_name_fr)
                 product_categorie_index_list.append(index)
-            print("Sélectionnez un produit s'il vous plaît!", product_categorie_index_list)
+            print("Sélectionnez un produit s'il vous plaît!",
+             product_categorie_index_list)
+
             try:
                 product_choice = int(input("Quel produit voulez-vous choisir?"))
                 if product_choice in product_categorie_index_list:

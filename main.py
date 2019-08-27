@@ -13,7 +13,7 @@ class MainPaje:
     BddQueries.meeting_user(BddQueries)
 
     while True:
-        main_choice = input("\n\1 - Quel aliment voulez-vous remplacer?\n\
+        main_choice = input("    1 - Quel aliment voulez-vous remplacer?\n\
     2 - Trouver mes aliments substitués.\n\
     3 - Inserer les produits dans la base de données, (premiére utilisation)!\n\
     4 - Quitter!\n\
