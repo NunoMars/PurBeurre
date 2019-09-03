@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from pprint import pprint
+
 class CleanFile:
     """
     Class to filter the data.
@@ -64,7 +64,6 @@ class CleanFile:
         "ingredients_text_fr",
         "nutrition_grade_fr"] #list of the labels to search, test and add to the new list
         
-        print ("Faisons du travail de nettoyage!")
         processed_products = [] 
         for product in products:# the list contains dictionaries
             current_product = {}

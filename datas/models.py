@@ -50,8 +50,7 @@ class History(BaseModel):
     chosen_product = ForeignKeyField(Product, related_name = 'chosen_product ', backref='history')
     remplacement_product = ForeignKeyField(Product, related_name = 'remplacement_product', backref='history')
 
-    class Meta:
-        primary_key = CompositeKey('id', 'chosen_product', "remplacement_product")             
+    class Meta:         
         db_table = 'history'
 
 class ProductCategory(BaseModel):
