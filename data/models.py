@@ -46,12 +46,12 @@ class Product(BaseModel):
 
 class History(BaseModel):
     """ Class to define the History table."""
-    id = PrimaryKeyField()
-    _id = ForeignKeyField(User, backref='history')
+    id = ForeignKeyField(User, backref='history')
     chosen_product = ForeignKeyField(Product, related_name = 'chosen_product ', backref='history')
     remplacement_product = ForeignKeyField(Product, related_name = 'remplacement_product', backref='history')
 
-    class Meta:          
+    class Meta:
+        primary_key = CompositeKey('id', 'chosen_product', "remplacement_product")             
         db_table = 'history'
 
 class ProductCategory(BaseModel):

@@ -38,12 +38,7 @@ class InsertOrDeleteData:
                 """
                 Import the products from download_products
                 """
-                DataFiles.download_and_clean_snacks(DataFiles)
-                DataFiles.download_and_clean_pizzas(DataFiles)
-                DataFiles.download_and_clean_drinks(DataFiles)
-                DataFiles.download_and_clean_cheese(DataFiles)
-                DataFiles.download_and_clean_pasta(DataFiles)
-                DataFiles.add_and_clean_all_products(DataFiles)
+                DataFiles.download_and_clean_all_products(DataFiles)
                 DataFiles.add_and_clean_products_to_inser(DataFiles)
                 DataFiles.add_and_clean_all_categories(DataFiles)
                 DataFiles.add_and_clean_all_stores(DataFiles)
@@ -58,11 +53,37 @@ class InsertOrDeleteData:
                 Insert all products in database
                 """
                 print("Insérons tous les nouveaux produits!")
-                Category.insert_many(categories).execute()
-                Store.insert_many(stores_tags).execute()
-                Product.insert_many(products_to_inser).execute()
-                ProductCategory.insert_many(_id_and_categories).execute()
-                ProductStore.insert_many(_id_and_stores).execute()
+
+                for data_dict in categories:
+                    try:
+                        Category.create(**data_dict)
+                    except:
+                        pass
+
+                for data_dict in stores_tags:
+                    try:
+                        Store.create(**data_dict)
+                    except:
+                        pass
+
+                for data_dict in products_to_inser:
+                    try:
+                        Product.create(**data_dict)
+                    except:
+                        pass
+
+                for data_dict in _id_and_categories:
+                    try:
+                        ProductCategory.create(**data_dict)
+                    except:
+                        pass
+
+                for data_dict in _id_and_stores:
+                    try:
+                        ProductStore.create(**data_dict)
+                    except:
+                        pass
+                        
                 print("Les produits sont, à present, sauvegardées dans la base de données!")
                 break
             else:

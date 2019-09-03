@@ -9,7 +9,7 @@ class DataFiles:
     pizzas = []
     drinks = []
     cheese = []
-    pasta = []
+    breads = []
     all_products = []
     products_to_inser = []
     categories = []
@@ -20,83 +20,34 @@ class DataFiles:
     def __init__ (self):
         print("L'importation a commencé, commençons le travail maintenant!")
 
-    def download_and_clean_snacks(self):
+    def download_and_clean_all_products(self):
         """
         Modul to download, clean and parse the products-file.
         """
 
-        link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=snacks&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"    
-        r = requests.get(link1)
-        self.snacks = json.loads(r.content)# rec the data in a variable
-        print("Nous avons maintenant 1000 produits téléchargés!")
-        self.snacks = CleanFile.clean_data(self.snacks) # cleanup the data
-        print("Nous avons ", len( self.snacks ),"collations téléchargées et nettoyées!")
+        link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Snacks%20sucr%C3%A9s&tagtype_1=categories&tag_contains_1=contains&tag_1=Snacks%20sucr%C3%A9s&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&tagtype_1=categories&tag_contains_1=contains&tag_1=pizza&sort_by=product_name&page_size=500&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&tagtype_1=categories&tag_contains_1=contains&tag_1=boissons&sort_by=product_name&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Produits%20laitiers&tagtype_1=categories&tag_contains_1=contains&tag_1=Produits%20laitiers&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+        link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Pains&tagtype_1=categories&tag_contains_1=contains&tag_1=Pains&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"    
+        
+        links = [link1, link2, link3, link4, link5]
+        categories_list = ["Snacks", "Pizza", "Boissons", "Produits laitiers", "Pains"]
 
+        for i,j  in zip(links, categories_list):
+            r = requests.get(i)
+            self.current_product = json.loads(r.content)# rec the data in a variable
 
-    def download_and_clean_pizzas(self):        
-        """
-        Modul to download, clean and parse the products-file.
-        """
-       
-        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&sort_by=unique_scans_n&page_size=500&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        r = requests.get(link2)
-        self.pizzas = json.loads(r.content)# rec the data in a variable
-        print("Nous avons maintenant plus 1000 produits téléchargés!")
-        self.pizzas = CleanFile.clean_data(self.pizzas)
-        print("Nous avons", len(self.pizzas), "pizzas téléchargées et nettoyées!")
+            print("Nous avons maintenant 1000 produits téléchargés!")
 
-    def download_and_clean_drinks(self):
-        """
-        Modul to download, clean and parse the products-file.
-        """
+            self.current_product = CleanFile.clean_data(self.current_product, j) # cleanup the data
 
-        link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        r = requests.get(link3)
-        self.drinks = json.loads(r.content)
-        print("Nous avons maintenant plus 1000 produits téléchargés!")
-        self.drinks = CleanFile.clean_data(self.drinks)
-        print("Nous avons", len( self.drinks ), "boissons téléchargées et nettoyées!")
-
-    def download_and_clean_cheese(self):
-        """
-        Modul to download, clean and parse the products-file.
-        """      
-
-        link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=fromages&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        r = requests.get(link4)
-        self.cheese = json.loads(r.content)
-        print("Nous avons maintenant plus 1000 produits téléchargés!")
-        self.cheese = CleanFile.clean_data(self.cheese)
-        print("Nous avons", len( self.cheese ), "fromages téléchargées et nettoyées!")
-
-    def download_and_clean_pasta(self):
-        """
-        Modul to download, clean and parse the products-file.
-        """
-
-        link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pâtes&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        r = requests.get(link5)
-        self.pasta = json.loads(r.content)
-        print("Nous avons maintenant 5000 produits téléchargés! Maintenant, nettoyons-les ;-) !")
-        self.pasta = CleanFile.clean_data(self.pasta)
-        print("Nous avons", len(self.pasta), "pâtes téléchargées et nettoyées!")
-      
-    def add_and_clean_all_products(self):
-        """
-        Modul to add, clean and parse all products-file.
-        """
-        if len(self.snacks) != 0:
-            self.all_products.extend(self.snacks)
-        if len(self.pizzas) != 0:
-            self.all_products.extend(self.pizzas)
-        if len(self.drinks) != 0:
-            self.all_products.extend(self.drinks)
-        if len(self.cheese) != 0:
-            self.all_products.extend(self.cheese)
-        if len(self.pasta) != 0:
-            self.all_products.extend(self.pasta)
+            if len(self.current_product) != 0:
+                self.all_products.extend(self.current_product)
+            print("Nous avons ", len( self.all_products),"produits téléchargées et nettoyées!")
 
         self.all_products = CleanFile.eliminate_duplicate_products(self.all_products)
+
         print("Après un dur travail de nettoyage, nous avons",
          len(self.all_products),
          "bons produits! Mettons-les dans la base de données!")
@@ -116,6 +67,7 @@ class DataFiles:
         """ 
         self.categories = CleanFile.select_categories(self.all_products)
         print("Nous avous, à présent ", len(self.categories),"categories!")
+
 
     def add_and_clean_all_stores(self):
         """
@@ -141,12 +93,7 @@ class DataFiles:
 
 if __name__ == "__main__":
 
-    DataFiles.download_and_clean_snacks(DataFiles)
-    DataFiles.download_and_clean_pizzas(DataFiles)
-    DataFiles.download_and_clean_drinks(DataFiles)
-    DataFiles.download_and_clean_cheese(DataFiles)
-    DataFiles.download_and_clean_pasta(DataFiles)
-    DataFiles.add_and_clean_all_products(DataFiles)
+    DataFiles.download_and_clean_all_products(DataFiles)
     DataFiles.add_and_clean_products_to_inser(DataFiles)
     DataFiles.add_and_clean_all_categories(DataFiles)
     DataFiles.add_and_clean_all_stores(DataFiles)
