@@ -12,6 +12,8 @@ class ChoiceProducts:
         """
         Def to propose 25 products each time and choose one.
         """
+        print(user_name, " vous avez choisi ", c_category, " !")
+
         query_products_categorie = (Product.select()
         .join(ProductCategory)
         .join(Category)
@@ -24,7 +26,6 @@ class ChoiceProducts:
             products_dict.update({index: product.product_name_fr})
             index = str(index)
             index_products_list.append(index)
-        print (index_products_list)
         n = 0
         t = 25
         i = 0
@@ -47,7 +48,7 @@ class ChoiceProducts:
 
                 if p_choice == 'Q' or p_choice == 'q':
                     break
-
+ 
                 if p_choice in index_products_list:
                     p_choice= int(p_choice)
                     product_choice = products_dict[p_choice]

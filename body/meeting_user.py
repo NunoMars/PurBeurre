@@ -1,7 +1,6 @@
 from datas.models import User
 from .first import MainMenu
 
-
 class Hi:
 
     def meeting_user():

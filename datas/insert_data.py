@@ -26,15 +26,15 @@ class ResetData:
             DataFiles.add_and_clean_all_id_and_categories(DataFiles)
             DataFiles.add_and_clean_all_id_and_stores(DataFiles)
             categories = DataFiles.categories
-            print("Nous avous, à présent ",str(len(categories)),"categories!")
+            print("Nous avous, à présent ", len(categories),"categories!")
             stores_tags = DataFiles.stores_tags
-            print("Nous avous aussi ",str(len(stores_tags)),"magasins!")
+            print("Nous avous aussi ",len(stores_tags),"magasins!")
             products_to_inser = DataFiles.products_to_inser
-            print("Nous avons ",str(len(products_to_inser)),"produits téléchargées et nettoyées!")
+            print("Nous avons ",len(products_to_inser),"produits téléchargées et nettoyées!")
             _id_and_categories = DataFiles._id_and_categories
-            print(str(len(_id_and_categories)),"Les identifiants et les catégories sont prêts à être insérés.")
+            print(len(_id_and_categories),"Les identifiants et les catégories sont prêts à être insérés.")
             _id_and_stores = DataFiles._id_and_stores
-            print(str(len(_id_and_stores)),"Les identifiants et les magasins sont prêts à être insérés.")
+            print(len(_id_and_stores),"Les identifiants et les magasins sont prêts à être insérés.")
 
             """
             Insert all products in database

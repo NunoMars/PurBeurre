@@ -28,7 +28,6 @@ class ChoiceCategorie:
 
                 if int(select_index) in index_list:
                     c_category = categories_dict[int(select_index)]
-                    print(user_name, " vous avez choisi ", c_category)
                     ChoiceProducts.Choice_products(c_category, user_name)
                     break
                 else:

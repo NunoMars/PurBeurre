@@ -5,11 +5,6 @@ class DataFiles:
     """
     Class allowing to download and filter the products to be inserted in the Data Base.
     """
-    snacks = []
-    pizzas = []
-    drinks = []
-    cheese = []
-    breads = []
     all_products = []
     products_to_inser = []
     categories = []
