@@ -18,13 +18,12 @@ class ProposedProducts:
         c_product = query_product[0]
 
         print(str(c_product.product_name_fr).upper(),
-         "!\n Son identifiant est:", str(c_product._id),
-         "\n ses ingredients :\n", str(c_product.ingredients_text_fr))
+         "!\n Son identifiant est:\n", c_product._id,
+         "\n Ses ingredients :\n", c_product.ingredients_text_fr,
+         "\n Son site web est :\n", c_product.url)
 
 
-
-        def seventh_button():
-            webbrowser.open_new(self.c_product.url)
+        webbrowser.open_new(c_product.url)
 
         query_proposed_product = (Product.select()
         .join(ProductCategory).join(Category)
@@ -36,8 +35,9 @@ class ProposedProducts:
 
 
         print(str(proposed_product.product_name_fr).upper(),
-         "!\n Son identifiant est:", str(proposed_product._id),
-         "\n ses ingredients :\n", str(proposed_product.ingredients_text_fr))
+         "!\n Son identifiant est:\n", str(proposed_product._id),
+         "\n Ses ingredients sont:\n", str(proposed_product.ingredients_text_fr),
+         )
 
         def eighth_button():
             webbrowser.open_new(self.proposed_product.url)
