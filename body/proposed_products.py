@@ -53,8 +53,7 @@ class ProposedProducts:
         while True:
             web_page_ask2 = input(
                 "Voulez-vous voir leur page internet?\n\
-                        [O] = Oui  [N] = Non (Possibilité de choisir un autre\
-                             produt dans la categorie)")
+                        [O] = Oui  [N] = Non(Possibilité de choisir un autre produit dans la categorie)")
             if web_page_ask2 == "O" or web_page_ask2 == "o":
                 webbrowser.open_new(c_product.url)
                 webbrowser.open_new(proposed_product.url)
