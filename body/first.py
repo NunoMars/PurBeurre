@@ -11,7 +11,7 @@ class MainMenu:
 
         while True:
             menu_choice = input(
-                user_name+"choisissez parmis ces choix ;-)!\n\
+                user_name+" choisissez parmis ces choix ;-)!\n\
             1-Quel aliment voulez-vous remplacer?\n\
             2-Trouver mes aliments substitués\n\
             3-Inserer les produits dans la base de données, \
