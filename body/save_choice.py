@@ -23,5 +23,7 @@ class SaveChoice:
                 )
                 print("Choix sauvagerdé;-) FAIT")
                 break
+            if save == "N" or save == "n":
+                break
             else:
                 continue

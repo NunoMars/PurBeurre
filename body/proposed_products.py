@@ -14,7 +14,7 @@ class ProposedProducts:
     def proposed_product(
         product_choice,
         c_category,
-        user_name,
+        user_name
     ):
         query_product = (
             Product.select()
@@ -43,12 +43,18 @@ class ProposedProducts:
         print(
             str(proposed_product.product_name_fr).upper(),
             "!\n Son identifiant est:\n", proposed_product._id,
-            "\n Ses ingredients sont:\n", proposed_product.ingredients_text_fr,
+            "\n Ses ingredients sont:\n",
+            proposed_product.ingredients_text_fr,
             "\n Son site internet est :\n", proposed_product.url)
+
+        SaveChoice.rec_current_products(
+            c_product, proposed_product, user_name)
 
         while True:
             web_page_ask2 = input(
-                "Voulez-vous voir leur page internet?\n  [O] = Oui  [N] = Non")
+                "Voulez-vous voir leur page internet?\n\
+                        [O] = Oui  [N] = Non (Possibilité de choisir un autre\
+                             produt dans la categorie)")
             if web_page_ask2 == "O" or web_page_ask2 == "o":
                 webbrowser.open_new(c_product.url)
                 webbrowser.open_new(proposed_product.url)
@@ -57,4 +63,3 @@ class ProposedProducts:
                 break
             else:
                 continue
-        SaveChoice.rec_current_products(c_product, proposed_product, user_name)
