@@ -8,7 +8,7 @@ class Hi:
         while True:
             user_name = input(
                 "BIENVENUE\n Je peut vous aider à trouver un produit équivalent.\n\
-                    Faisons d'habord connaiscance, quel est votre nom?")
+                    Faisons d'habord connaiscance, quel est votre nom?   :")
             if user_name == '' or user_name == ' ':
                 continue
             else:
