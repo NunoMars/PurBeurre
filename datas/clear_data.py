@@ -30,7 +30,7 @@ class CleanFile:
             for p_label, p_value in product.items():  # test if the labels
                 if p_label in wanted_labels:
                     if len(p_value) != 0:
-                        if p_value not None or p_value != "null":
+                        if p_value != " " or p_value != "null":
                             current_product.update({p_label: p_value})
             o_current_product = OrderedDict(sorted(
                 current_product.items(), key=lambda t: t[0]))

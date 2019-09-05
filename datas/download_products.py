@@ -76,7 +76,7 @@ class DataFiles:
         """
         Modul to prepare id_and_sores-file to insert in database.
         """
-    self._id_and_stores = CleanFile.select_id_and_stores_tags(
+        self._id_and_stores = CleanFile.select_id_and_stores_tags(
             self.all_products)
 
     def add_and_clean_all_id_and_categories(self):
