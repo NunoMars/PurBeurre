@@ -32,7 +32,6 @@ class ChoiceProducts:
         i = 0
 
         while True:
-            
             for i in range(n, t):
                 print(i, products_dict[i])
                 i += 1
