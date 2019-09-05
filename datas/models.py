@@ -26,7 +26,7 @@ class Store(BaseModel):
     """ Class to define the Store table."""
     stores_tags = CharField(primary_key=True)
 
-    class Meta:                
+    class Meta:
         db_table = 'store'
 
 
@@ -34,7 +34,7 @@ class Category(BaseModel):
     """ Class to define the Category table."""
     categories = CharField(primary_key=True)
     
-    class Meta:    
+    class Meta:
         db_table = 'category'
 
 
@@ -46,7 +46,7 @@ class Product(BaseModel):
     product_name_fr = TextField()
     url = TextField()
 
-    class Meta:                
+    class Meta:
         db_table = 'product'
 
 
@@ -58,7 +58,7 @@ class History(BaseModel):
     remplacement_product = ForeignKeyField(
         Product, related_name='remplacement_product', backref='history')
 
-    class Meta:         
+    class Meta:
         db_table = 'history'
 
 
@@ -68,7 +68,7 @@ class ProductCategory(BaseModel):
     categories = ForeignKeyField(Category, backref='product_category')
 
     class Meta:
-        primary_key = CompositeKey('_id', 'categories')                
+        primary_key = CompositeKey('_id', 'categories')
         db_table = 'product_category'
 
 
@@ -78,7 +78,7 @@ class ProductStore(BaseModel):
     stores_tags = ForeignKeyField(Store, backref='product-store')
 
     class Meta:
-        primary_key = CompositeKey('_id', 'stores_tags')                
+        primary_key = CompositeKey('_id', 'stores_tags')
         db_table = 'product_store'
 
 if __name__ == "__main__":
