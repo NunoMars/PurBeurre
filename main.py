@@ -2,6 +2,7 @@
 # -*- coding: Utf-8 -*
 from body.meeting_user import Hi
 
+
 class MainPaje:
     """
     Main page of the program.
