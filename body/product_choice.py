@@ -41,7 +41,7 @@ class ChoiceProducts:
                     "Choisissez parmis ces produits!\n" +
                     "Entrez son numero pour choisir!\n" +
                     "[C] pour continuer [Q] pour quiter\
-                          et revenir au menu ! ;-)")
+                    et revenir au menu ! ;-)")
 
                 if p_choice == 'C' or p_choice == 'c':
                     n = t + 1

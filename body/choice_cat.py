@@ -26,7 +26,7 @@ class ChoiceCategorie:
             try:
                 select_index = input(
                     "Quelle categorie voulez vous consulter " +
-                    str(index_list)+" ?")
+                    str(index_list) + " ?")
 
                 if int(select_index) in index_list:
                     c_category = categories_dict[int(select_index)]
@@ -34,5 +34,5 @@ class ChoiceCategorie:
                     break
                 else:
                     continue
-                except ValueError:
-                    continue
+            except ValueError:
+                continue
