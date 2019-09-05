@@ -32,7 +32,7 @@ class ChoiceProducts:
         i = 0
 
         while True:
-
+            
             for i in range(n, t):
                 print(i, products_dict[i])
                 i += 1
@@ -59,7 +59,7 @@ class ChoiceProducts:
                     ProposedProducts.proposed_product(
                         product_choice, c_category, user_name)
                     break
-            except:
+            except:  # Set to zero and restart
                 n = 0
                 t = 25
                 i = 0
