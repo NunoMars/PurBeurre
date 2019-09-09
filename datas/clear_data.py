@@ -18,7 +18,7 @@ class CleanFile:
             "url",
             "ingredients_text_fr",
             "nutrition_grade_fr"]  # list of the labels to search
-        print("Faisons du travail de nettoyage!")
+        print("Faisons du travail de nettoyage sur ", file2, "!")
         processed_products = []
 
         for product in products:  # the list contains dictionaries
