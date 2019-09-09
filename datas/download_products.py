@@ -51,40 +51,32 @@ class DataFiles:
 
         self.all_products = CleanFile.eliminate_duplicate_products(
             self.all_products)
-
-    def add_and_clean_products_to_inser(self):
         """
-        Modul to prepare products-file to insert in database.
+        Prepare products-file to insert in database.
         """
-
         self.products_to_inser = CleanFile.products_to_inser(self.all_products)
-    
-    def add_and_clean_all_categories(self):
         """
-        Modul to prepare categories-file to insert in database.
+        Prepare categories-file to insert in database.
         """
 
         self.categories = CleanFile.select_categories(self.all_products)
 
-    def add_and_clean_all_stores(self):
         """
-        Modul to prepare stores-file to insert in database.
+        Prepare stores-file to insert in database.
         """
         self.stores_tags = CleanFile.select_stores_tags(self.all_products)
-    
-    def add_and_clean_all_id_and_stores(self):
+
         """
-        Modul to prepare id_and_sores-file to insert in database.
+        Prepare id_and_sores-file to insert in database.
         """
         self._id_and_stores = CleanFile.select_id_and_stores_tags(
             self.all_products)
 
-    def add_and_clean_all_id_and_categories(self):
         """
-        Modul to prepare id_and_categorie-file to insert in database.
+        Prepare id_and_categorie-file to insert in database.
         """
         self._id_and_categories = CleanFile.select_id_and_categories(
             self.all_products)
 
 if __name__ == "__main__":
-    pass
+    DataFiles()

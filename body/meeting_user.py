@@ -18,4 +18,4 @@ class Hi:
                 break
 
 if __name__ == "__main__":
-    pass
+    Hi.meeting_user()

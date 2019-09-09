@@ -60,7 +60,7 @@ class ProposedProducts:
                 webbrowser.open_new(c_product.url)
                 webbrowser.open_new(proposed_product.url)
                 break
-            if web_page_ask == "N" or web_page_ask == "n":
+            if web_page_ask2 == "N" or web_page_ask2 == "n":
                 break
             else:
                 continue

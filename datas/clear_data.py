@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 class CleanFile:
     """
-    Class to filter the data.
+    Class to filter ansd clean the data.
     """
 
     def clean_data(file1, file2):
@@ -88,7 +88,7 @@ class CleanFile:
         for item in current_category:
             processed_categories.append({"categories": item})
         return processed_categories
-       
+
     def select_stores_tags(file):
         """
         Search and records all store_tags for insert in data_base.

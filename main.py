@@ -11,4 +11,4 @@ class MainPaje:
 
 
 if __name__ == "__main__":
-    pass
+    MainPaje()
