@@ -1,6 +1,14 @@
 import requests
 import json
-from .clear_data import CleanFile
+from .clear_data import (
+    clean_data,
+    eliminate_duplicate_products,
+    products_to_inser,
+    select_categories,
+    select_stores_tags,
+    select_id_and_stores_tags,
+    select_id_and_categories
+)
 
 
 class DataFiles:
@@ -43,39 +51,39 @@ class DataFiles:
             r = requests.get(i)
             self.current_product = json.loads(r.content)
 
-            self.current_product = CleanFile.clean_data(
+            self.current_product = clean_data(
                 self.current_product, j)
 
             if len(self.current_product) != 0:
                 self.all_products.extend(self.current_product)
 
-        self.all_products = CleanFile.eliminate_duplicate_products(
+        self.all_products = eliminate_duplicate_products(
             self.all_products)
         """
         Prepare products-file to insert in database.
         """
-        self.products_to_inser = CleanFile.products_to_inser(self.all_products)
+        self.products_to_inser = products_to_inser(self.all_products)
         """
         Prepare categories-file to insert in database.
         """
 
-        self.categories = CleanFile.select_categories(self.all_products)
+        self.categories = select_categories(self.all_products)
 
         """
         Prepare stores-file to insert in database.
         """
-        self.stores_tags = CleanFile.select_stores_tags(self.all_products)
+        self.stores_tags = select_stores_tags(self.all_products)
 
         """
         Prepare id_and_sores-file to insert in database.
         """
-        self._id_and_stores = CleanFile.select_id_and_stores_tags(
+        self._id_and_stores = select_id_and_stores_tags(
             self.all_products)
 
         """
         Prepare id_and_categorie-file to insert in database.
         """
-        self._id_and_categories = CleanFile.select_id_and_categories(
+        self._id_and_categories = select_id_and_categories(
             self.all_products)
 
 if __name__ == "__main__":

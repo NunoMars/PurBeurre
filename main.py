@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
-from body.meeting_user import Hi
+from body.meeting_user import meeting
 
 
-class MainPaje:
-    """
-    Main page of the program.
-    """
-    Hi.meeting_user()
+"""
+main page
+"""
+
+
+def start_program():
+    meeting()
 
 
 if __name__ == "__main__":
-    MainPaje()
+    start_program()
