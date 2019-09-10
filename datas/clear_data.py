@@ -72,7 +72,7 @@ class CleanFile:
                     current_product.update({p_label: p_value})
             processed_products.append(current_product)
         return processed_products  # return cleaned file
-    
+
     def select_categories(file):
         """
         Search and records all categories for insert in data_base.

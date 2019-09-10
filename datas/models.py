@@ -33,7 +33,7 @@ class Store(BaseModel):
 class Category(BaseModel):
     """ Class to define the Category table."""
     categories = CharField(primary_key=True)
-    
+
     class Meta:
         db_table = 'category'
 
