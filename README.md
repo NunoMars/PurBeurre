@@ -22,4 +22,3 @@ Le module body contient 7 sous-modules :
 
 Il se lance par le module "main.py".
 
-# PurBeurre
