@@ -26,16 +26,16 @@ def choice_products(c_category, user_name):
         index = str(index)
         index_products_list.append(index)
     print("Nous avons", len(index_products_list), "produits!")
-    n = 0
-    t = 25
-    i = 0
+    n = 0  # Page mumber
+    t = 25  # Number or products
+    i = 0  # Index
 
     while True:
         try:
             for i in range(n, t):
                 print(i, products_dict[i])
                 i += 1
-        except:  # Set to zero and restart
+        except KeyError:  # Set products-list to zero and restart
             n = 0
             t = 25
             i = 0
@@ -43,8 +43,8 @@ def choice_products(c_category, user_name):
         p_choice = input(
                 "Choisissez parmis ces produits!\n" +
                 "Entrez son numero pour choisir!\n" +
-                "[C] pour continuer [Q]\
-                        pour quiter et revenir au menu ! ;-)")
+                "[C] pour continuer [Q]" +
+                "pour quiter et revenir au menu ! ;-)")
 
         if p_choice == 'C' or p_choice == 'c':
             n = t + 1

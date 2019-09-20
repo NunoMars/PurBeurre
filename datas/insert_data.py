@@ -95,3 +95,4 @@ def insert_all_products(user_name):
         print(
             "Les produits sont, à present,",
             " sauvegardées dans la base de données!")
+
