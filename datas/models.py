@@ -4,7 +4,7 @@ from peewee import *
 """
 Defines and create database.
 """
-mysql_db = MySQLDatabase('Pur_beurre')
+mysql_db = MySQLDatabase('Pur_beurre', user="root", host="localhost")
 
 
 class BaseModel(Model):
