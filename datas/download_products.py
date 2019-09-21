@@ -32,13 +32,6 @@ class DataFiles:
         """
         print("Connexion a l'API afin de telecharger les produits")
 
-        link1 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Snacks%20sucr%C3%A9s&tagtype_1=categories&tag_contains_1=contains&tag_1=Snacks%20sucr%C3%A9s&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        link2 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=pizza&tagtype_1=categories&tag_contains_1=contains&tag_1=pizza&sort_by=product_name&page_size=500&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        link3 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=boissons&tagtype_1=categories&tag_contains_1=contains&tag_1=boissons&sort_by=product_name&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        link4 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Produits%20laitiers&tagtype_1=categories&tag_contains_1=contains&tag_1=Produits%20laitiers&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        link5 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Pains&tagtype_1=categories&tag_contains_1=contains&tag_1=Pains&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        link6 = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=Plats%20prepares&tagtype_1=categories&tag_contains_1=contains&tag_1=Plats%20prepares&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
-        links = [link1, link2, link3, link4, link5, link6]
         categories_list = [
             "Snacks",
             "Pizza",
@@ -47,12 +40,16 @@ class DataFiles:
             "Pains",
             "Plats préparés"]
 
-        for i, j in zip(links, categories_list):
-            r = requests.get(i)
+        for item in categories_list:
+            r = requests.get(
+                "https://fr.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0=" +
+                item + "&tagtype_1=categories&tag_contains_1=contains&tag_1=" +
+                item + "&sort_by=unique_scans_n&page_size=1000&axis_x=energy&axis_y=products_n&action=process&page=2&json=1"
+                )
             self.current_product = json.loads(r.content)
 
             self.current_product = clean_data(
-                self.current_product, j)
+                self.current_product, item)
 
             if len(self.current_product) != 0:
                 self.all_products.extend(self.current_product)
