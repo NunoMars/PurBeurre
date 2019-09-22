@@ -12,6 +12,9 @@ def consult_history(user_name):
     """
     Def to consulte the history recs.
     """
+    user_name = user_name.capitalize()
+    User.get_or_create(u_name=user_name)
+    
     query_user = User.select().where(User.u_name == user_name)
     c_user = query_user[0]
 

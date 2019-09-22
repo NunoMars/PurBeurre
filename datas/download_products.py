@@ -34,7 +34,7 @@ class DataFiles:
 
         categories_list = [
             "Snacks",
-            "Pizza",
+            "Céréales et dérivés",
             "Boissons",
             "Produits laitiers",
             "Pains",

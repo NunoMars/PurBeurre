@@ -1,10 +1,28 @@
 from peewee import *
+import json
 
+
+with open('datas/config.json') as config_file:
+    data = json.load(config_file)
+
+DB_NAME = data['DB_NAME']
+DB_USER = data['DB_USER']
+DB_PASSWORD = data['DB_PASSWORD']
+DB_HOST = data['DB_HOST']
+DB_PORT = data['DB_PORT']
+DB_CHARSET = data['DB_CHARSET']
 
 """
 Defines and create database.
 """
-mysql_db = MySQLDatabase('Pur_beurre', user="root", host="localhost")
+mysql_db = MySQLDatabase(
+    database=DB_NAME,
+    user=DB_USER,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=DB_PORT,
+    charset=DB_CHARSET
+    )
 
 
 class BaseModel(Model):

@@ -20,5 +20,6 @@ Le module body contient 7 sous-modules :
 - save_choice (permets d’enregistrer le choix dans la base de données afin que l’utilisateur puisse les consultera tout moment)
 - consult_rec (vas afficher la liste de produits enregistrés par l’utilisateur)
 
-Il se lance par le module "main.py".
+Le programe se lance par le module "main.py".
+Lors de la premiére utilisation, on rengtre son nom, et au menu on choisi l'option 4 - "premiére utilisation", et suivez les instructions.
 

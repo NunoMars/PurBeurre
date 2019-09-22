@@ -1,4 +1,3 @@
-from datas.models import User
 from .first import main_menu
 
 
@@ -10,8 +9,6 @@ def meeting():
         if user_name == '' or user_name == ' ':
             continue
         else:
-            user_name = user_name.capitalize()
-            User.get_or_create(u_name=user_name)
             main_menu(user_name)
             break
 

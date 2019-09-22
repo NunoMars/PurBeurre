@@ -8,6 +8,7 @@ from .models import(
     ProductStore
 )
 from .download_products import DataFiles
+import json
 
 
 def insert_all_products(user_name):
@@ -25,8 +26,33 @@ def insert_all_products(user_name):
         """
         Import the products from download_products
         """
+        with open('datas/config.json') as config_file:
+            data = json.load(config_file)
+        print(
+            "Afin de permettre au programe de se connecter a MYSQL server,",
+            " veuillez renseigner vos identifiants de connexion"
+            )
+        DB_USER = input(
+            "Votre nom d'utilizateur utilisé lors de la création du serveur: "
+            )
+        data['DB_USER'] = DB_USER
+
+        DB_PASSWORD = input("Votre mot de pass : ")
+        data['DB_PASSWORD'] = DB_PASSWORD
+
+        with open('datas/config.json', 'w') as config_file:
+            json.dump(data, config_file)
+
         DataFiles.download_and_clean_all_products(DataFiles)
 
+        User.create_table()
+        Store.create_table()
+        Category.create_table()
+        Product.create_table()
+        History.create_table()
+        ProductCategory.create_table()
+        ProductStore.create_table()
+        
         categories = DataFiles.categories
         print(
             "Nous avous, à présent ",
